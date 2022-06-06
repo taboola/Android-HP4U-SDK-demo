@@ -35,7 +35,7 @@ class SharedViewModel: ViewModel() {
 
     fun isTextValid(editable: Editable): Boolean {
         val text: String = editable.toString()
-        return text.isNotEmpty() && text.contains(regex = Regex("^[a-zA-Z]+$"))
+        return text.isNotEmpty()
     }
 
     fun isAllInputValid(): Boolean {
