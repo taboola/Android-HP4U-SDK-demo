@@ -99,5 +99,8 @@ class SettingsScreenFragment: Fragment() {
             model.setSwitchCheckedStatus(compoundButton.id, isChecked)
             binding.preloadSwitch.isClickable = !model.isLazyLoadChecked()
         }
+
+        //Default settings is Preload
+        binding.preloadSwitch.isChecked = true
     }
 }
