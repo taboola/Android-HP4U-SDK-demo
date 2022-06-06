@@ -23,6 +23,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
         android:text="Taboola “HomePage For You” Demo
         Using this app is subject to Taboola Terms, Legal contract, and Business terms.\nFor questions, comments, and feedback, please reach out to android.sdk@taboola.com"
         android:textSize="20dp"
