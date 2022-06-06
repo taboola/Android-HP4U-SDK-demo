@@ -91,13 +91,15 @@ class SettingsScreenFragment: Fragment() {
 
     private fun setupSwitchLogic(model: SharedViewModel) {
         binding.preloadSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            compoundButton.isChecked = isChecked
+            binding.lazyLoadSwitch.isChecked = !isChecked
             model.setSwitchCheckedStatus(compoundButton.id, isChecked)
-            binding.lazyLoadSwitch.isClickable = !model.isPreloadSwitchChecked()
-
         }
+
         binding.lazyLoadSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            compoundButton.isChecked = isChecked
+            binding.preloadSwitch.isChecked = !isChecked
             model.setSwitchCheckedStatus(compoundButton.id, isChecked)
-            binding.preloadSwitch.isClickable = !model.isLazyLoadChecked()
         }
 
         //Default settings is Preload
