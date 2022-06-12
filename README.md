@@ -108,4 +108,9 @@ Possible errors:
 
 - `public boolean onHomePageItemClick(String sectionName, String itemId, String clickUrl, boolean isOrganic, String customData) {}`
   When implemented, it allows the hosting app to decide what to do when intercepting clicks.
-  
+
+# Legal
+
+Using this repository is subject to Taboola’s [terms of service](https://www.taboola.com/policies/platform-terms-of-use), [privacy policy](https://www.taboola.com/policies/privacy-policy), and the non-disclosed/business agreements set by Taboola and you.
+Do not share the content of this repository with any third party.
+The files in this repository are for demo usage only and should not use in production without Taboola's approval
