@@ -89,4 +89,23 @@ Previous steps are enough for integrating HomePage, this section describes addit
 
 - Set a unique id: This will set custom User
   homePage.setUnifiedId(String unifiedId);
+
+### Callbacks
+
+Listen to TBLHomePageListener. All functions are optional and do not need to be implemented.
+
+- `public void onHomePageStatusChanged(boolean status) {}`
+  Triggered when HomePage is being initialized
+
+- `public void onHomePageError(String error, String sectionName) {}`
+  Triggered while the swapped items are being rendered.
+
+Possible errors:
+- "SWAP_FAILED_DUE_TO_MISSING_DATA"
+- "FAILED_TO_RETRIEVE_RECOMMENDATION"
+- "SWAP_FAILED_DUE_TO_MISSING_RECOMMENDATION"
+- "SWAP_FAILED_DUE_TO_MISSING_START_POSITION_ON_UNIT"
+
+- `public boolean onHomePageItemClick(String sectionName, String itemId, String clickUrl, boolean isOrganic, String customData) {}`
+  When implemented, it allows the hosting app to decide what to do when intercepting clicks.
   
