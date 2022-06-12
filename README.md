@@ -87,7 +87,7 @@ Previous steps are enough for integrating HomePage, this section describes addit
   homePage.setTargetType(String targetType);
 
 
-- Set a unique id: This will set custom User
+- Set a unique id for the HomePage instance
   homePage.setUnifiedId(String unifiedId);
 
 ### Callbacks
