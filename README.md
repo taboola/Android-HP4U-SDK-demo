@@ -2,12 +2,9 @@
 
 ## Preface
 
-This project showcases how to integrate Taboola's SDK on Android and iOS and use its HomePage capabilities.
+This project showcases how to integrate Taboola's SDK on Android and use its HomePage capabilities.
 
-
-### Android
-
-#### Android - Initialization
+### Initialization
 
 1. Add Taboola's SDK to your project by going to your application's `build.gradle` file:
    implementation 'com.taboola:android-sdk:3.7.0'
@@ -20,7 +17,7 @@ This project showcases how to integrate Taboola's SDK on Android and iOS and use
    TBLPublisherInfo publisherInfo = new TBLPublisherInfo("PublisherName").setApiKey("apiKey");
    Taboola.init(publisherInfo);
 
-#### Android - Creating a HomePage Instance
+### Creating a HomePage Instance
 
 1. The API to create a HomePage instance in your activity/fragment is:
    TBLHomePage homePage = Taboola.getHomePage(sourceType, pageUrl, tblHomePageListener, sectionsNames);
@@ -33,7 +30,7 @@ The parameters you need to pass in are:
 
 > SectionName is the string title of each group of articles separated by categories.
 
-#### Android - HomePage Setup
+### HomePage Setup
 
 1. In order to link the HomePage to the articles your presenting, call the `attach` API with your viewgroup
 
@@ -43,7 +40,7 @@ The parameters you need to pass in are:
 
         homePage.fetchContent();
 
-#### Android - Swap Articles
+### Swap Articles
 
 To swap articles with content from Taboola,
 call the `shouldSwapItemInSection` function in your OnBind methd to get the swapped item's content.
@@ -68,13 +65,13 @@ The parameters you need to pass in are:
 - thumbnailView: UI element representing the image of the cell
 - additionalView(optional): UI element representing the all other view in the lineView which aren’t mandatory
 
-##### How does the swapping take place?
+#### How does the swapping take place?
 When you call `shouldSwapItemInSection`, Taboola verifies that this item is allowed to be swapped and validates the fields of the content, then performs a swap with a recommendation.
 Taboola will handle the views the publisher desires to swap.
 It will validate the fields of the content and the swapped content as well.
 After a successful validation - Taboola will swap the publisher’s content with Taboola recommendations, and return a boolean that indicates if the swapping process did occur.
 
-### Android - Additional HomePage functionality
+### Additional HomePage functionality
 
 Previous steps are enough for integrating HomePage, this section describes additional methods for HomePage.
 
