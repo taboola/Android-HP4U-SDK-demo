@@ -1,6 +1,8 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
 import android.text.Editable
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.taboola.hp4udemoapplication.R
 
@@ -51,4 +53,7 @@ class SharedViewModel: ViewModel() {
         return true
     }
 
+    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
+        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container,fragmentToSwitch).commit()
+    }
 }
