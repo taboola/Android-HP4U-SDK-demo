@@ -90,15 +90,24 @@ class SettingsScreenFragment: Fragment() {
         })
     }
 
+    /**
+     * Only one switch can be active at a time
+     * So when one of the switches is pressed, the other one is turned off
+     */
     private fun setupSwitchLogic(model: SharedViewModel) {
         binding.preloadSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            compoundButton.isChecked = isChecked
+            binding.lazyLoadSwitch.isChecked = !isChecked
             model.setSwitchCheckedStatus(compoundButton.id, isChecked)
-            binding.lazyLoadSwitch.isClickable = !model.isPreloadSwitchChecked()
+        }
 
-        }
         binding.lazyLoadSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            compoundButton.isChecked = isChecked
+            binding.preloadSwitch.isChecked = !isChecked
             model.setSwitchCheckedStatus(compoundButton.id, isChecked)
-            binding.preloadSwitch.isClickable = !model.isLazyLoadChecked()
         }
+
+        //Default setting is Preload should be checked
+        binding.preloadSwitch.isChecked = true
     }
 }

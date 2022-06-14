@@ -15,17 +15,15 @@ class SharedViewModel: ViewModel() {
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
-            R.id.preload_switch -> isPreloadChecked = checkedState
-            R.id.lazy_load_switch -> isLazyLoadChecked = checkedState
+            R.id.preload_switch -> {
+                isPreloadChecked = checkedState
+                isLazyLoadChecked = !checkedState
+            }
+            R.id.lazy_load_switch -> {
+                isLazyLoadChecked = checkedState
+                isPreloadChecked = !checkedState
+            }
         }
-    }
-
-    fun isPreloadSwitchChecked(): Boolean {
-        return isPreloadChecked
-    }
-
-    fun isLazyLoadChecked(): Boolean {
-        return isLazyLoadChecked
     }
 
     fun setUserInput(editTextId: Int, input: String) {
@@ -37,7 +35,7 @@ class SharedViewModel: ViewModel() {
 
     fun isTextValid(editable: Editable): Boolean {
         val text: String = editable.toString()
-        return text.isNotEmpty() && text.contains(regex = Regex("^[a-zA-Z]+$"))
+        return text.isNotEmpty()
     }
 
     fun isAllInputValid(): Boolean {
