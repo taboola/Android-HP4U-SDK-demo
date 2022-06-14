@@ -109,4 +109,14 @@ class SettingsScreenFragment: Fragment() {
         //Default setting is Preload should be checked
         binding.preloadSwitch.isChecked = true
     }
+
+    override fun onResume() {
+        super.onResume()
+        model.hideToolbar(requireActivity())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        model.showToolbar(requireActivity())
+    }
 }
