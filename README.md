@@ -7,7 +7,7 @@ This project showcases how to integrate Taboola's SDK on Android and use its Hom
 ### Initialization
 
 1. Add Taboola's SDK to your project by going to your application's `build.gradle` file:
-   implementation 'com.taboola:android-sdk:3.7.0'
+   implementation 'com.taboola:android-sdk:3.8.0'
 2. Inside your project's `build.gradle` file, under `allProjects -> repositories` add this:
    maven {
    url 'https://taboolapublic.jfrog.io/artifactory/mobile-release'
@@ -32,7 +32,7 @@ The parameters you need to pass in are:
 
 ### HomePage Setup
 
-1. In order to link the HomePage to the articles your presenting, call the `attach` API with your viewgroup
+1. In order to link the HomePage to the articles you are presenting, call the `attach` API with your viewgroup
 
         homePage.attach(ViewGroup viewGroup);
 
@@ -44,7 +44,7 @@ The parameters you need to pass in are:
 
 To swap articles with content from Taboola,
 call the `shouldSwapItemInSection` function in your OnBind methd to get the swapped item's content.
-It returns YES if the item was swapped, NO if it wasn't.
+It returns True if the item was swapped, False if it wasn't.
 
 
         public boolean shouldSwapItemInSection(
