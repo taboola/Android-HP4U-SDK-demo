@@ -4,11 +4,8 @@ import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.view.SettingsScreenFragment
 
 class SharedViewModel: ViewModel() {
 
