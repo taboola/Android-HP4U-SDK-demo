@@ -35,6 +35,14 @@ class SharedViewModel: ViewModel() {
         }
     }
 
+    fun getPublisherName() :String{
+        return publisherName
+    }
+
+    fun getApiKey() :String{
+        return apiKey
+    }
+
     fun isTextValid(editable: Editable): Boolean {
         val text: String = editable.toString()
         return text.isNotEmpty()
