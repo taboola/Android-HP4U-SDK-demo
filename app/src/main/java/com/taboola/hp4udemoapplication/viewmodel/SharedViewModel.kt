@@ -63,6 +63,6 @@ class SharedViewModel: ViewModel() {
     }
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
-        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container,fragmentToSwitch).addToBackStack("backTag").commit()
+        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack("backTag").commit()
     }
 }

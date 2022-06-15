@@ -37,7 +37,7 @@ class SettingsScreenFragment: Fragment() {
 
     private fun setupButtons(model: SharedViewModel) {
         binding.demoInformationBtn.setOnClickListener {
-            model.switchFragment(requireActivity(),InformativeScreenFragment())
+            model.switchFragment(requireActivity(), InformativeScreenFragment())
         }
 
         binding.launchDemoBtn.setOnClickListener {
