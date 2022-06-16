@@ -48,7 +48,6 @@ class SharedViewModel: ViewModel() {
         if (publisherName.isEmpty() || apiKey.isEmpty()) {
             return false
         }
-
         return true
     }
 
