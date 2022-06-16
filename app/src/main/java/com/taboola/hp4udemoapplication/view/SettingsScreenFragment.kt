@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
+
 class SettingsScreenFragment: Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
@@ -36,7 +37,7 @@ class SettingsScreenFragment: Fragment() {
 
     private fun setupButtons(model: SharedViewModel) {
         binding.demoInformationBtn.setOnClickListener {
-            //Start activity
+            model.switchFragment(requireActivity(), InformativeScreenFragment())
         }
 
         binding.launchDemoBtn.setOnClickListener {

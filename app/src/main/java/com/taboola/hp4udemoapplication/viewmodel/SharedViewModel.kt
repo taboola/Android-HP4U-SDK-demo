@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.view.SettingsScreenFragment
 
 class SharedViewModel: ViewModel() {
 
@@ -49,7 +48,6 @@ class SharedViewModel: ViewModel() {
         if (publisherName.isEmpty() || apiKey.isEmpty()) {
             return false
         }
-
         return true
     }
 
@@ -63,4 +61,7 @@ class SharedViewModel: ViewModel() {
         appCompatActivity.supportActionBar?.show()
     }
 
+    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
+        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
+    }
 }
