@@ -13,7 +13,8 @@ import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
-class SettingsScreenFragment : Fragment() {
+
+class SettingsScreenFragment: Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -37,7 +38,7 @@ class SettingsScreenFragment : Fragment() {
 
     private fun setupButtons(model: SharedViewModel) {
         binding.demoInformationBtn.setOnClickListener {
-            //Start activity
+            model.switchFragment(requireActivity(), InformativeScreenFragment())
         }
 
         binding.launchDemoBtn.setOnClickListener {
@@ -114,5 +115,15 @@ class SettingsScreenFragment : Fragment() {
 
         //Default setting is Preload should be checked
         binding.preloadSwitch.isChecked = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        model.hideToolbar(requireActivity())
+    }
+
+    override fun onPause() {
+        super.onPause()
+        model.showToolbar(requireActivity())
     }
 }

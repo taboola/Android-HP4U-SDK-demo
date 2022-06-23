@@ -1,6 +1,9 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
 import android.text.Editable
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.taboola.hp4udemoapplication.R
 
@@ -46,8 +49,20 @@ class SharedViewModel: ViewModel() {
         if (publisherName.isEmpty() || apiKey.isEmpty()) {
             return false
         }
-
         return true
     }
 
+    fun hideToolbar(activity: FragmentActivity) {
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.supportActionBar?.hide()
+    }
+
+    fun showToolbar(activity: FragmentActivity) {
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.supportActionBar?.show()
+    }
+
+    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
+        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
+    }
 }
