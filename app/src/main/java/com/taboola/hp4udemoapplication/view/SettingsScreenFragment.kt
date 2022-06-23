@@ -9,10 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
-class SettingsScreenFragment: Fragment() {
+class SettingsScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -41,16 +42,21 @@ class SettingsScreenFragment: Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
-                //Start activity
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, HomePageScreenFragment())?.addToBackStack("")?.commit()
             } else {
-                Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "You have not filled out all required fields",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 
     private fun setupEditTextValidation(model: SharedViewModel) {
 
-        binding.publisherEt.addTextChangedListener(object: TextWatcher {
+        binding.publisherEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -61,7 +67,7 @@ class SettingsScreenFragment: Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                    when(model.isTextValid(p0)) {
+                    when (model.isTextValid(p0)) {
                         false -> binding.publisherEt.error = "Your input is wrong"
                         true -> model.setUserInput(binding.publisherEt.id, p0.toString())
                     }
@@ -69,7 +75,7 @@ class SettingsScreenFragment: Fragment() {
             }
         })
 
-        binding.apiKeyEt.addTextChangedListener(object: TextWatcher {
+        binding.apiKeyEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -80,7 +86,7 @@ class SettingsScreenFragment: Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                    when(model.isTextValid(p0)) {
+                    when (model.isTextValid(p0)) {
                         false -> binding.apiKeyEt.error = "Your input is wrong"
                         true -> model.setUserInput(binding.apiKeyEt.id, p0.toString())
                     }

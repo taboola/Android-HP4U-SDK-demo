@@ -38,6 +38,7 @@ class SharedViewModel: ViewModel() {
 
     fun isAllInputValid(): Boolean {
         //One switch must be checked
+        return true
         if (!isPreloadChecked && !isLazyLoadChecked) {
             return false
         }
