@@ -13,11 +13,15 @@ class MainHomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
     private val title: TextView?
         get() = itemView.findViewById(R.id.title)
 
+    private val content: TextView?
+        get() = itemView.findViewById(R.id.content)
+
     private val image: ImageView?
         get() = itemView.findViewById(R.id.main_image)
 
     fun onBind(article: Article) {
         title?.text = article.title
+        content?.text = article.content
         if (article.imageUrl.isNotEmpty()) {
             Picasso.get().load(article.imageUrl).error(R.mipmap.ic_launcher).into(image)
         }
