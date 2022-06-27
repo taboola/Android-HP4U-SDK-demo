@@ -1,5 +1,6 @@
 package com.taboola.hp4udemoapplication.adapters.articles
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +10,8 @@ import com.taboola.hp4udemoapplication.data.Article
 import com.taboola.hp4udemoapplication.data.BaseItem
 import com.taboola.hp4udemoapplication.data.Header
 
-class HomePageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomePageAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data = ArrayList<BaseItem>()
 
@@ -26,8 +28,24 @@ class HomePageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             .inflate(layout, parent, false)
 
         return when (viewType) {
-            MAIN_ARTICLE -> MainHomePageItemViewHolder(view)
-            DEFAULT_ARTICLE -> HomePageItemViewHolder(view)
+            MAIN_ARTICLE -> {
+                val mainItemViewHolder = MainHomePageItemViewHolder(view)
+                view.setOnClickListener {
+                    val url = (data[mainItemViewHolder.adapterPosition] as Article).url
+                    onItemClickListener.onClick(url)
+                }
+                return mainItemViewHolder
+            }
+            DEFAULT_ARTICLE -> {
+
+                val viewHolder = HomePageItemViewHolder(view)
+                view.setOnClickListener {
+                    val url = (data[viewHolder.adapterPosition] as Article).url
+                    onItemClickListener.onClick(url)
+                }
+                return viewHolder
+            }
+
             HEADER -> HeaderViewHolder(view)
             else -> throw IllegalArgumentException("Invalid type")
         }
@@ -72,5 +90,9 @@ class HomePageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private const val HEADER = 0
         private const val MAIN_ARTICLE = 1
         private const val DEFAULT_ARTICLE = 2
+    }
+
+    public interface OnItemClickListener {
+        fun onClick(url: String)
     }
 }
