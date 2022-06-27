@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
@@ -33,9 +34,17 @@ class SettingsScreenFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDefaultConfiguration(model)
         setupEditTextValidation(model)
         setupSwitchLogic(model)
         setupButtons(model)
+    }
+
+    private fun setupDefaultConfiguration(model: SharedViewModel) {
+        binding.publisherEt.setText(HP4UDemoConstants.DEFAULT_PUBLISHER_NAME)
+        binding.apiKeyEt.setText(HP4UDemoConstants.DEFAULT_API_KEY)
+        model.setUserInput(binding.publisherEt.id, HP4UDemoConstants.DEFAULT_PUBLISHER_NAME)
+        model.setUserInput(binding.apiKeyEt.id, HP4UDemoConstants.DEFAULT_API_KEY)
     }
 
     private fun setupButtons(model: SharedViewModel) {
