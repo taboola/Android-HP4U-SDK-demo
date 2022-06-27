@@ -9,37 +9,21 @@
     tools:context=".view.MainActivity">
 
     <TextView
-        android:id="@+id/demo_settings_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:text="Demo Settings"
-        android:textColor="#ff0000"
-        android:textSize="20sp"
-        android:layout_marginStart="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-    </TextView>
-
-    <TextView
         android:id="@+id/account_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
         android:gravity="start"
         android:text="Account"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/publisher_input_layout"
+        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/demo_settings_tv"
-        app:layout_constraintVertical_bias="0.044">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102">
     </TextView>
 
     <LinearLayout
@@ -48,9 +32,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/demo_settings_tv"
-        app:layout_constraintVertical_bias="0.072">
+        app:layout_constraintTop_toBottomOf="@+id/account_text_view"
+        app:layout_constraintVertical_bias="0.034">
 
         <TextView
             android:id="@+id/publisher_tv"
@@ -65,12 +50,13 @@
         </TextView>
 
         <EditText
+            android:id="@+id/publisher_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="50sp"
+            android:layout_marginEnd="20sp"
             android:hint="Enter Publisher Name"
-            android:textColor="@color/black"
-            android:id="@+id/publisher_et">
+            android:textColor="@color/black">
         </EditText>
     </LinearLayout>
 
@@ -80,7 +66,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/publisher_input_layout"
-        app:layout_constraintVertical_bias="0.072">
+        app:layout_constraintVertical_bias="0.022"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/api_key_tv"
@@ -98,26 +85,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="62sp"
+            android:layout_marginEnd="20sp"
             android:hint="Enter API Key"
             android:textColor="@color/black">
         </EditText>
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/choose_setting_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/black"
         android:text="Loading (choose one of the following)"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/api_key_layout"
-        app:layout_constraintVertical_bias="0.147">
+        app:layout_constraintVertical_bias="0.068">
     </TextView>
 
     <LinearLayout
@@ -125,33 +112,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_setting_tv"
-        app:layout_constraintVertical_bias="0.094">
+        app:layout_constraintVertical_bias="0.044">
 
         <TextView
             android:id="@+id/preload_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
             android:text="Preload"
+            android:textColor="@color/black"
             android:textSize="20sp">
         </TextView>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/preload_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/preload_switch"
-            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat"
             android:gravity="end"
-            android:minHeight="48dp">
+            android:layout_marginEnd="20dp"
+            android:minHeight="48dp"
+            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat">
         </androidx.appcompat.widget.SwitchCompat>
-
     </LinearLayout>
 
     <LinearLayout
@@ -159,66 +146,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/preload_switch_layout"
-        app:layout_constraintVertical_bias="0.073">
+        app:layout_constraintVertical_bias="0.026">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
             android:text="Lazy load"
+            android:textColor="@color/black"
             android:textSize="20sp">
         </TextView>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/lazy_load_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:id="@+id/lazy_load_switch"
-            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat"
-            android:minHeight="48dp">
+            android:layout_marginEnd="20dp"
+            android:minHeight="48dp"
+            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat">
         </androidx.appcompat.widget.SwitchCompat>
-
     </LinearLayout>
 
     <Button
         android:id="@+id/demo_information_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#E9E9EB"
         android:text="Demo Information"
         android:textAllCaps="false"
-        android:textSize="20sp"
         android:textColor="#FF3B30"
-        android:backgroundTint="#E9E9EB"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lazy_load_switch_layout"
-        app:layout_constraintVertical_bias="0.513">
+        app:layout_constraintVertical_bias="0.442">
     </Button>
 
     <Button
         android:id="@+id/launch_demo_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FF3B30"
         android:text="Launch Demo!"
         android:textAllCaps="false"
-        android:textSize="30sp"
         android:textColor="@color/white"
-        android:backgroundTint="#FF3B30"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/demo_information_btn"
-        app:layout_constraintVertical_bias="0.382">
+        app:layout_constraintVertical_bias="0.144">
     </Button>
 
 
