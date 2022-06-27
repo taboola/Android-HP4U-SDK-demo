@@ -1,5 +1,6 @@
 package com.taboola.hp4udemoapplication.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
@@ -113,11 +116,8 @@ class SettingsScreenFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        model.hideToolbar(requireActivity())
-    }
-
-    override fun onPause() {
-        super.onPause()
-        model.showToolbar(requireActivity())
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        model.setToolbarTitle(requireActivity(), "Demo Settings")
+        model.setToolbarTitleColor(toolbar, Color.RED)
     }
 }
