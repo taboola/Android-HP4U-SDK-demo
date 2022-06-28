@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.taboola.android.homepage.TBLHomePage
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.data.Article
 import com.taboola.hp4udemoapplication.data.BaseItem
 import com.taboola.hp4udemoapplication.data.Header
 
-class HomePageAdapter(private val onItemClickListener: OnItemClickListener) :
+class HomePageAdapter(
+    private var homePage: TBLHomePage?,
+    private val onItemClickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val data = ArrayList<BaseItem>()
@@ -57,7 +61,11 @@ class HomePageAdapter(private val onItemClickListener: OnItemClickListener) :
                 (holder as MainHomePageItemViewHolder).onBind(data[position] as Article)
             }
             DEFAULT_ARTICLE -> if (data[position] is Article) {
-                (holder as HomePageItemViewHolder).onBind(data[position] as Article)
+                (holder as HomePageItemViewHolder).onBind(
+                    homePage,
+                    position,
+                    data[position] as Article
+                )
             }
             HEADER -> if (data[position] is Header) {
                 (holder as HeaderViewHolder).onBind(data[position] as Header)

@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.taboola.hp4udemoapplication.adapters.articles.HomePageAdapter
 import com.taboola.hp4udemoapplication.databinding.FragmentHomePageScreenBinding
 import com.taboola.hp4udemoapplication.mock.DataGenerator
+import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 class HomePageScreenFragment : Fragment() {
     private lateinit var binding: FragmentHomePageScreenBinding
+    private val model: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,11 +31,12 @@ class HomePageScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.homepageRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        val homePageAdapter = HomePageAdapter(object : HomePageAdapter.OnItemClickListener{
-            override fun onClick(url: String) {
-                Log.d("HomePageScreenFragment", "Article item clicked $url");
-            }
-        })
+        val homePageAdapter =
+            HomePageAdapter(model.getHomePage(), object : HomePageAdapter.OnItemClickListener {
+                override fun onClick(url: String) {
+                    Log.d("HomePageScreenFragment", "Article item clicked $url");
+                }
+            })
         binding.homepageRecyclerview.adapter = homePageAdapter
         homePageAdapter.setData(DataGenerator.getGeneratedData())
     }

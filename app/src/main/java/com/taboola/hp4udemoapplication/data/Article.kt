@@ -5,5 +5,6 @@ data class Article(
     var content: String,
     var imageUrl: String,
     var url: String,
-    var category: String
+    var category: String,
+    var sectionName: String
 ) : BaseItem(ARTICLE_TYPE)
