@@ -9,7 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.taboola.android.TBLPublisherInfo
+import com.taboola.android.Taboola
+import com.taboola.android.global_components.eventsmanager.TBLEventType
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
+import com.taboola.hp4udemoapplication.model.PublisherInfo
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 
@@ -38,11 +42,15 @@ class SettingsScreenFragment: Fragment() {
     private fun setupButtons(model: SharedViewModel) {
         binding.demoInformationBtn.setOnClickListener {
             model.switchFragment(requireActivity(), InformativeScreenFragment())
+            model.reportTaboolaEvent()
+
         }
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
                 //Start activity
+                    model.reportTaboolaEvent()
+                //model.reportApplicationIsLive()
             } else {
                 Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
             }

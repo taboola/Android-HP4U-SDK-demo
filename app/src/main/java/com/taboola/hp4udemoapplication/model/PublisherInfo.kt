@@ -6,7 +6,7 @@ package com.taboola.hp4udemoapplication.model
 
 class PublisherInfo {
     companion object {
-        val PUBLISHER = "sdk-tester-rnd"
-        val API_KEY = "c4c6a04f0b48c7992ff477c89a28ef8d41932d12"
+        val PUBLISHER = "sdk-tester-hp4u-demo"
+        val API_KEY = "05380b1d71ca985df52d641e1f0336ebbb8d67f7"
     }
 }
