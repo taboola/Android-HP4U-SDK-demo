@@ -1,17 +1,22 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
 import android.text.Editable
+import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.android.listeners.TBLHomePageListener
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
+import com.taboola.hp4udemoapplication.view.HomePageScreenFragment
 import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
@@ -21,17 +26,34 @@ class SharedViewModel : ViewModel() {
     private var publisherName: String = ""
     private var apiKey: String = ""
     private var homePage: TBLHomePage? = null
+    private var itemClicked = MutableLiveData<String?>()
 
     init {
-        Taboola.init(TBLPublisherInfo("sdk-tester-hp4u-demo").setApiKey("05380b1d71ca985df52d641e1f0336ebbb8d67f7"))
+        Taboola.init(
+            TBLPublisherInfo(HP4UDemoConstants.DEFAULT_PUBLISHER_NAME).setApiKey(
+                HP4UDemoConstants.DEFAULT_API_KEY
+            )
+        )
         homePage = Taboola.getHomePage(
             "text", "https://www.sdktesterhp4udemo.com",
-            null, "sport", "technology", "topnews"
+            object : TBLHomePageListener() {
+                override fun onHomePageItemClick(
+                    sectionName: String?,
+                    itemId: String?,
+                    clickUrl: String?,
+                    isOrganic: Boolean,
+                    customData: String?
+                ): Boolean {
+                    itemClicked.value = clickUrl
+                    return false
+                }
+            }, "sport", "technology", "topnews"
         )
     }
 
+    fun itemClicked(): LiveData<String?> = itemClicked
 
-    public fun getHomePage(): TBLHomePage? = homePage
+    fun getHomePage(): TBLHomePage? = homePage
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when (switchId) {
@@ -60,7 +82,6 @@ class SharedViewModel : ViewModel() {
 
     fun isAllInputValid(): Boolean {
         //One switch must be checked
-        return true
         if (!isPreloadChecked && !isLazyLoadChecked) {
             return false
         }
@@ -71,16 +92,19 @@ class SharedViewModel : ViewModel() {
         return true
     }
 
-    fun setToolbarTitle(activity: FragmentActivity, toolbarTitle:String) {
+    fun setToolbarTitle(activity: FragmentActivity, toolbarTitle: String) {
         val appCompatActivity = activity as AppCompatActivity
         appCompatActivity.supportActionBar?.title = toolbarTitle
     }
 
-    fun setToolbarTitleColor(toolbar: Toolbar, color: Int) {
-        toolbar.setTitleTextColor(color)
+    fun setToolbarTitleTextAppearance(toolbar: Toolbar, resId: Int) {
+        toolbar.setTitleTextAppearance(toolbar.context, resId)
     }
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
+        if (fragmentToSwitch is HomePageScreenFragment) {
+            homePage?.fetchContent()
+        }
         fragmentActivity.supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }

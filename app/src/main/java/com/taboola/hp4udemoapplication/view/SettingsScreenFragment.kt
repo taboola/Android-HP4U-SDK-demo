@@ -1,6 +1,5 @@
 package com.taboola.hp4udemoapplication.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,7 +16,7 @@ import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 
-class SettingsScreenFragment: Fragment() {
+class SettingsScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -54,10 +53,13 @@ class SettingsScreenFragment: Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
-                activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.container, HomePageScreenFragment())?.addToBackStack("")?.commit()
+                model.switchFragment(requireActivity(), HomePageScreenFragment())
             } else {
-                Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "You have not filled out all required fields",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -128,6 +130,6 @@ class SettingsScreenFragment: Fragment() {
         super.onResume()
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         model.setToolbarTitle(requireActivity(), "Demo Settings")
-        model.setToolbarTitleColor(toolbar, Color.RED)
+        model.setToolbarTitleTextAppearance(toolbar, R.style.RobotTextAppearance)
     }
 }
