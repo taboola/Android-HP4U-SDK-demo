@@ -1,6 +1,5 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
-import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -33,11 +32,6 @@ class SharedViewModel: ViewModel() {
             R.id.publisher_et -> publisherName = input
             R.id.api_key_et -> apiKey = input
         }
-    }
-
-    fun isTextValid(editable: Editable): Boolean {
-        val text: String = editable.toString()
-        return text.isNotEmpty()
     }
 
     fun isAllInputValid(): Boolean {
