@@ -55,11 +55,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Always required:
-    implementation 'com.taboola:android-sdk:3.8.0'
+    implementation 'com.taboola:android-sdk:3.8.1'
 
     // To open the clicked item in a new *tab*:
     implementation 'androidx.browser:browser:1.2.0'
-
-
-
 }

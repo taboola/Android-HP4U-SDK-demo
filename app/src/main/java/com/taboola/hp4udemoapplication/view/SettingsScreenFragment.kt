@@ -16,7 +16,6 @@ import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.model.PublisherInfo
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
-
 class SettingsScreenFragment: Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
@@ -37,20 +36,18 @@ class SettingsScreenFragment: Fragment() {
         setupEditTextValidation(model)
         setupSwitchLogic(model)
         setupButtons(model)
+
     }
 
     private fun setupButtons(model: SharedViewModel) {
         binding.demoInformationBtn.setOnClickListener {
             model.switchFragment(requireActivity(), InformativeScreenFragment())
-            model.reportTaboolaEvent()
-
         }
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
                 //Start activity
-                    model.reportTaboolaEvent()
-                //model.reportApplicationIsLive()
+                model.reportTaboolaEventPerSession()
             } else {
                 Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
             }
