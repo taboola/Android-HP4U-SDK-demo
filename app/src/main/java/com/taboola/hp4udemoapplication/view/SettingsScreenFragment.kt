@@ -1,5 +1,6 @@
 package com.taboola.hp4udemoapplication.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,14 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.global_components.eventsmanager.TBLEventType
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
+import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.model.PublisherInfo
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
+
 
 class SettingsScreenFragment: Fragment() {
 
@@ -33,10 +38,18 @@ class SettingsScreenFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDefaultConfiguration(model)
         setupEditTextValidation(model)
         setupSwitchLogic(model)
         setupButtons(model)
 
+    }
+
+    private fun setupDefaultConfiguration(model: SharedViewModel) {
+        binding.publisherEt.setText(HP4UDemoConstants.DEFAULT_PUBLISHER_NAME)
+        binding.apiKeyEt.setText(HP4UDemoConstants.DEFAULT_API_KEY)
+        model.setUserInput(binding.publisherEt.id, HP4UDemoConstants.DEFAULT_PUBLISHER_NAME)
+        model.setUserInput(binding.apiKeyEt.id, HP4UDemoConstants.DEFAULT_API_KEY)
     }
 
     private fun setupButtons(model: SharedViewModel) {
@@ -118,11 +131,8 @@ class SettingsScreenFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        model.hideToolbar(requireActivity())
-    }
-
-    override fun onPause() {
-        super.onPause()
-        model.showToolbar(requireActivity())
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        model.setToolbarTitle(requireActivity(), "Demo Settings")
+        model.setToolbarTitleColor(toolbar, Color.RED)
     }
 }
