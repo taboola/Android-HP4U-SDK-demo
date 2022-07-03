@@ -8,8 +8,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel: ViewModel() {
@@ -88,15 +90,13 @@ class SharedViewModel: ViewModel() {
 
     @SuppressLint("RestrictedApi")
     fun reportTaboolaEvent(){
-        //We will use this when the user enter the input
+
         val tblPublisherInfo = TBLPublisherInfo(getPublisherName()).setApiKey(getApiKey())
-        // Initialize Taboola SDK as early as possible
+
         Taboola.init(tblPublisherInfo)
 
-        //TBLEVENTTYPE = INTERFACE
         val homePageDemoUsedEvent = HomePageDemoUsedEvent("HP4U_ANDROID_USED",getHP4UEvent())
         Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
-
     }
 
     fun reportTaboolaEventPerSession(){
