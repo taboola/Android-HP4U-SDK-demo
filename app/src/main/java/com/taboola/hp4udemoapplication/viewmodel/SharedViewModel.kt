@@ -14,6 +14,7 @@ class SharedViewModel: ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
+    private var tblItemUrl: String =""
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
@@ -65,7 +66,11 @@ class SharedViewModel: ViewModel() {
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
 
-    fun getUrlOfTblItem(tblItem : String) :String{
-        return tblItem
+    fun setTBLItemUrl(tblItemUrl: String){
+        this.tblItemUrl = tblItemUrl
+    }
+
+    fun getTblItemUrl():String{
+        return tblItemUrl
     }
 }
