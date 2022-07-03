@@ -3,15 +3,7 @@ package com.taboola.hp4udemoapplication.view
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
-import com.taboola.android.TBLPublisherInfo
-import com.taboola.android.Taboola
-import com.taboola.android.global_components.eventsmanager.TBLEventType
-import com.taboola.android.global_components.eventsmanager.TBLEventsManager
-import com.taboola.android.global_components.eventsmanager.events.TBLMobileEvent
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.model.PublisherInfo
-import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 class MainActivity : AppCompatActivity() {
 

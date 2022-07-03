@@ -11,13 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.taboola.android.TBLPublisherInfo
-import com.taboola.android.Taboola
-import com.taboola.android.global_components.eventsmanager.TBLEventType
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
-import com.taboola.hp4udemoapplication.model.PublisherInfo
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 

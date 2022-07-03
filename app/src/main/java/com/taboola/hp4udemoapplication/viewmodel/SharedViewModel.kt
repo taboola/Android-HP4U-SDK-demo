@@ -18,8 +18,8 @@ class SharedViewModel: ViewModel() {
 
     private var isPreloadChecked: Boolean = false
     private var isLazyLoadChecked: Boolean = false
-    private var publisherName: String = "sdk-tester-hp4u-demo"
-    private var apiKey: String = "05380b1d71ca985df52d641e1f0336ebbb8d67f7"
+    private var publisherName: String = ""
+    private var apiKey: String = ""
     private var isApplicationLive = false
     private var usageEventKey = "MobileEventHP4U"
     private var usageEventValue = "HP4U_ANDROID_USED"
