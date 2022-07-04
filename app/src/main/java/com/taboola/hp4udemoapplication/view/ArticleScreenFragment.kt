@@ -11,11 +11,11 @@ import com.taboola.hp4udemoapplication.databinding.FragmentArticleScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 private const val TBL_CLICKED_ITEM_URL = "tblClickedItemUrl"
+private const val SCREEN_TOOLBAR_TITLE = "Article Screen"
 
 class ArticleScreenFragment : Fragment() {
 
     private var tblClickedItemUrl: String? = ""
-    private var screenToolbarTitle = "Article Screen"
 
     private lateinit var binding: FragmentArticleScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -35,7 +35,7 @@ class ArticleScreenFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  FragmentArticleScreenBinding.inflate(layoutInflater, container, false)
         binding.articleUrl.setText(tblClickedItemUrl)
-        model.setToolbarTitle(requireActivity(),screenToolbarTitle)
+        model.setToolbarTitle(requireActivity(),SCREEN_TOOLBAR_TITLE)
         binding.loremIpsumHuge.movementMethod = ScrollingMovementMethod()
 
         return binding.root
