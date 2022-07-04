@@ -1,11 +1,15 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import com.taboola.android.TBLPublisherInfo
+import com.taboola.android.Taboola
+import com.taboola.hp4udemoapplication.HomePageDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel: ViewModel() {
@@ -14,6 +18,9 @@ class SharedViewModel: ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
+    private var isApplicationLive = false
+    private var usageEventKey = "MobileEventHP4U"
+    private var usageEventValue = "HP4U_ANDROID_USED"
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
@@ -64,4 +71,40 @@ class SharedViewModel: ViewModel() {
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
+
+    fun getPublisherName() :String{
+        return publisherName
+    }
+
+    fun getApiKey() :String{
+        return apiKey
+    }
+
+    fun getHP4UEvent(): Map<String, String> {
+        val map: MutableMap<String, String> = HashMap()
+        map[usageEventKey] = usageEventValue
+        return map
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun reportTaboolaEvent(){
+
+        val tblPublisherInfo = TBLPublisherInfo(getPublisherName()).setApiKey(getApiKey())
+
+        Taboola.init(tblPublisherInfo)
+
+        val homePageDemoUsedEvent = HomePageDemoUsageEvent(usageEventValue,getHP4UEvent())
+        Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
+    }
+
+    fun reportTaboolaEventPerSession(){
+        if(!isApplicationLive){
+            reportTaboolaEvent()
+            isApplicationLive = true
+        }
+        else{
+            //We already reported, DO Nothing.
+        }
+    }
+
 }

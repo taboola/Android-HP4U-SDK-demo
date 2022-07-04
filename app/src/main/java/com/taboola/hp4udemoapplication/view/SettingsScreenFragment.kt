@@ -55,6 +55,7 @@ class SettingsScreenFragment: Fragment() {
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
                 //Start activity
+                model.reportTaboolaEventPerSession()
             } else {
                 Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
             }
