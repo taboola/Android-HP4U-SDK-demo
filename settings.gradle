@@ -3,6 +3,10 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven {
+            // Taboola:
+            url 'https://taboolapublic.jfrog.io/artifactory/mobile-release'
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +14,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            // Taboola:
+            url 'https://taboolapublic.jfrog.io/artifactory/mobile-release'
+        }
     }
 }
 rootProject.name = "HP4U Demo Application"
