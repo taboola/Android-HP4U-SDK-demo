@@ -1,7 +1,5 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
-import android.text.Editable
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -9,7 +7,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
@@ -17,7 +14,6 @@ import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.view.HomePageScreenFragment
-import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
 
@@ -73,11 +69,6 @@ class SharedViewModel : ViewModel() {
             R.id.publisher_et -> publisherName = input
             R.id.api_key_et -> apiKey = input
         }
-    }
-
-    fun isTextValid(editable: Editable): Boolean {
-        val text: String = editable.toString()
-        return text.isNotEmpty()
     }
 
     fun isAllInputValid(): Boolean {
