@@ -65,12 +65,4 @@ class SharedViewModel: ViewModel() {
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
-
-    fun setTBLItemUrl(tblItemUrl: String){
-        this.tblItemUrl = tblItemUrl
-    }
-
-    fun getTblItemUrl():String{
-        return tblItemUrl
-    }
 }
