@@ -7,8 +7,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
-import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
@@ -19,8 +19,6 @@ class SharedViewModel: ViewModel() {
     private var publisherName: String = ""
     private var apiKey: String = ""
     private var isApplicationLive = false
-    private var usageEventKey = "MobileEventHP4U"
-    private var usageEventValue = "HP4U_ANDROID_USED"
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
@@ -72,39 +70,19 @@ class SharedViewModel: ViewModel() {
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
 
-    fun getPublisherName() :String{
-        return publisherName
-    }
-
-    fun getApiKey() :String{
-        return apiKey
-    }
-
-    fun getHP4UEvent(): Map<String, String> {
-        val map: MutableMap<String, String> = HashMap()
-        map[usageEventKey] = usageEventValue
-        return map
+    private fun createDataMapForEvents(eventKey : String, eventValue : String): Map<String, String> {
+        val data: MutableMap<String, String> = HashMap()
+        data[eventKey] = eventValue
+        return data
     }
 
     @SuppressLint("RestrictedApi")
-    fun reportTaboolaEvent(){
+    fun reportTaboolaUsageEventPerSession(){
 
-        val tblPublisherInfo = TBLPublisherInfo(getPublisherName()).setApiKey(getApiKey())
-
-        Taboola.init(tblPublisherInfo)
-
-        val homePageDemoUsedEvent = HP4UDemoUsageEvent(usageEventValue,getHP4UEvent())
-        Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
-    }
-
-    fun reportTaboolaEventPerSession(){
         if(!isApplicationLive){
-            reportTaboolaEvent()
+            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.usageEventValue,createDataMapForEvents(HP4UDemoConstants.usageEventKey,HP4UDemoConstants.usageEventValue))
+            Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
             isApplicationLive = true
         }
-        else{
-            //We already reported, DO Nothing.
-        }
     }
-
 }
