@@ -14,7 +14,6 @@ class SharedViewModel: ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
-    private var tblItemUrl: String =""
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
