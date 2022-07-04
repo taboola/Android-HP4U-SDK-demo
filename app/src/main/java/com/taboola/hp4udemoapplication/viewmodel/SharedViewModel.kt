@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
-import com.taboola.hp4udemoapplication.HomePageDemoUsageEvent
+import com.taboola.hp4udemoapplication.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel: ViewModel() {
@@ -93,7 +93,7 @@ class SharedViewModel: ViewModel() {
 
         Taboola.init(tblPublisherInfo)
 
-        val homePageDemoUsedEvent = HomePageDemoUsageEvent(usageEventValue,getHP4UEvent())
+        val homePageDemoUsedEvent = HP4UDemoUsageEvent(usageEventValue,getHP4UEvent())
         Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
     }
 
