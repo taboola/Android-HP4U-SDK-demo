@@ -79,7 +79,8 @@ class SharedViewModel: ViewModel() {
     @SuppressLint("RestrictedApi")
     fun reportTaboolaUsageEventPerSession(){
         if(!isApplicationLive){
-            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.usageEventValue,createDataMapForEvent(HP4UDemoConstants.usageEventKey,HP4UDemoConstants.usageEventValue))
+            val dataForUsageEvent = createDataMapForEvent(HP4UDemoConstants.USAGE_EVENT_KEY, HP4UDemoConstants.USAGE_EVENT_VALUE) as HashMap<String, String>
+            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.USAGE_EVENT_VALUE,dataForUsageEvent)
             Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
             isApplicationLive = true
         }
