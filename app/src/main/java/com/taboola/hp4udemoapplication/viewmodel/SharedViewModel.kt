@@ -70,8 +70,8 @@ class SharedViewModel: ViewModel() {
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
 
-    private fun createDataMapForEvent(eventKey : String, eventValue : String): Map<String, String> {
-        val data: MutableMap<String, String> = HashMap()
+    private fun createDataMapForEvent(eventKey : String, eventValue : String): HashMap<String, String> {
+        val data: HashMap<String, String> = HashMap()
         data[eventKey] = eventValue
         return data
     }
@@ -79,7 +79,7 @@ class SharedViewModel: ViewModel() {
     @SuppressLint("RestrictedApi")
     fun reportTaboolaUsageEventPerSession(){
         if(!isApplicationLive){
-            val dataForUsageEvent = createDataMapForEvent(HP4UDemoConstants.USAGE_EVENT_KEY, HP4UDemoConstants.USAGE_EVENT_VALUE) as HashMap<String, String>
+            val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.USAGE_EVENT_KEY, HP4UDemoConstants.USAGE_EVENT_VALUE)
             val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.USAGE_EVENT_VALUE,dataForUsageEvent)
             Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
             isApplicationLive = true
