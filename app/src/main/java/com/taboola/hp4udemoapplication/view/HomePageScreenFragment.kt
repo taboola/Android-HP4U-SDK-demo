@@ -32,18 +32,22 @@ class HomePageScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.homepageRecyclerview.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
         val homePageAdapter =
             HomePageAdapter(model.getHomePage(), object : HomePageAdapter.OnItemClickListener {
                 override fun onClick(url: String) {
                     Log.d("HomePageScreenFragment", "Article item clicked $url");
-                    //TODO use this line to open article screen
-                    // model.switchFragment(requireActivity(), )
+                    model.switchFragment(requireActivity(), ArticleScreenFragment.newInstance(url))
                 }
             })
+        binding.homepageRecyclerview.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         binding.homepageRecyclerview.adapter = homePageAdapter
         homePageAdapter.setData(DataGenerator.getGeneratedData())
+        model.setupHomePage(binding.homepageRecyclerview)
+        model.itemClicked().observe(viewLifecycleOwner, Observer {
+            model.switchFragment(requireActivity(), ArticleScreenFragment.newInstance(it))
+        })
     }
 
     override fun onResume() {
@@ -51,9 +55,6 @@ class HomePageScreenFragment : Fragment() {
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         model.setToolbarTitle(requireActivity(), "News")
         model.setToolbarTitleTextAppearance(toolbar, R.style.NoticeTextAppearance)
-        model.itemClicked().observe(this, Observer {
-            //TODO use this line to open article screen
-            // model.switchFragment(requireActivity(), )
-        })
+
     }
 }

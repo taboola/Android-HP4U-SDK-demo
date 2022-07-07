@@ -21,9 +21,9 @@ class DataGenerator {
 
             data.add(
                 Article(
-                    "Get healthy, go to a green space",
-                    "In the best, we've written a great deal about the health benefits of spending time in green spaces. Here are a few particularly good tidbits",
-                    "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_70%2Ch_340%2Cw_567%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https://www.optimistdaily.com/wp-content/uploads/shutterstock_1924096910-scaled-e1655909633739.jpg",
+                    "Get healthy, go green space",
+                    "In the best, we've written a great deal about the health benefits",
+                    "https://ychef.files.bbci.co.uk/1600x900/p072bwvx.webp",
                     "https://taboolanews.com/summary-page/3687694654531729572",
                     CATEGORY_0,
                     CATEGORY_0

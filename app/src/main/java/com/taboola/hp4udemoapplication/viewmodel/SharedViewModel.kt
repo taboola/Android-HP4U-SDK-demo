@@ -1,5 +1,7 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -7,12 +9,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
+import com.taboola.hp4udemoapplication.SingleLiveEvent
 import com.taboola.hp4udemoapplication.view.HomePageScreenFragment
 
 class SharedViewModel : ViewModel() {
@@ -22,7 +26,7 @@ class SharedViewModel : ViewModel() {
     private var publisherName: String = ""
     private var apiKey: String = ""
     private var homePage: TBLHomePage? = null
-    private var itemClicked = MutableLiveData<String?>()
+    private var itemClicked = SingleLiveEvent<String?>()
 
     init {
         Taboola.init(
@@ -31,8 +35,14 @@ class SharedViewModel : ViewModel() {
             )
         )
         homePage = Taboola.getHomePage(
-            "text", "https://www.sdktesterhp4udemo.com",
+            "home", "https://www.sdktesterhp4udemo.com",
             object : TBLHomePageListener() {
+
+                override fun onHomePageError(error: String?, sectionName: String?) {
+                    super.onHomePageError(error, sectionName)
+                    Log.d("SLAVA", error + "")
+                }
+
                 override fun onHomePageItemClick(
                     sectionName: String?,
                     itemId: String?,
@@ -93,10 +103,14 @@ class SharedViewModel : ViewModel() {
     }
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
-        if (fragmentToSwitch is HomePageScreenFragment) {
+        if (fragmentToSwitch is HomePageScreenFragment && isPreloadChecked) {
             homePage?.fetchContent()
         }
         fragmentActivity.supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
+    }
+
+    fun setupHomePage(homepageRecyclerview: RecyclerView) {
+        homePage?.attach(homepageRecyclerview)
     }
 }
