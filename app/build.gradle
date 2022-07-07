@@ -55,6 +55,4 @@ dependencies {
 
     //Taboola SDK
     implementation 'com.taboola:android-sdk:3.8.1'
-    // To open the clicked item in a new *tab*:
-    implementation 'androidx.browser:browser:1.2.0'
 }

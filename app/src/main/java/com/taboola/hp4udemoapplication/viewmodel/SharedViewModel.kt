@@ -1,7 +1,6 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
 import android.annotation.SuppressLint
-import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -74,8 +73,8 @@ class SharedViewModel: ViewModel() {
     @SuppressLint("RestrictedApi")
     fun reportTaboolaUsageEventPerSession(){
         if(!wasUsageEventFired){
-            val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.HP4U_MOBILE_EVENT_KEY, HP4UDemoConstants.HP4U_MOBILE_EVENT_VALUE)
-            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_EVENT_VALUE, dataForUsageEvent)
+            val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT_KEY, HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT)
+            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT, dataForUsageEvent)
             Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
             wasUsageEventFired = true
         }
