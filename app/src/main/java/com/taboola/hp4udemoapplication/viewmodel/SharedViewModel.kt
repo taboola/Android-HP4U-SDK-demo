@@ -40,11 +40,6 @@ class SharedViewModel: ViewModel() {
         }
     }
 
-    fun isTextValid(editable: Editable): Boolean {
-        val text: String = editable.toString()
-        return text.isNotEmpty()
-    }
-
     fun isAllInputValid(): Boolean {
         //One switch must be checked
         if (!isPreloadChecked && !isLazyLoadChecked) {
