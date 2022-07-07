@@ -18,7 +18,7 @@ class SharedViewModel: ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
-    private var isUsageEventFired = false
+    private var wasUsageEventFired = false
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
@@ -78,11 +78,11 @@ class SharedViewModel: ViewModel() {
 
     @SuppressLint("RestrictedApi")
     fun reportTaboolaUsageEventPerSession(){
-        if(!isUsageEventFired){
+        if(!wasUsageEventFired){
             val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.HP4U_MOBILE_EVENT_KEY, HP4UDemoConstants.HP4U_MOBILE_EVENT_VALUE)
-            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_EVENT_VALUE,dataForUsageEvent)
+            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_EVENT_VALUE, dataForUsageEvent)
             Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
-            isUsageEventFired = true
+            wasUsageEventFired = true
         }
     }
 }
