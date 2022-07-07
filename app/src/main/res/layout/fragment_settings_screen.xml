@@ -86,6 +86,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="62sp"
             android:layout_marginEnd="20sp"
+            android:lines="2"
             android:hint="Enter API Key"
             android:textColor="@color/black">
         </EditText>

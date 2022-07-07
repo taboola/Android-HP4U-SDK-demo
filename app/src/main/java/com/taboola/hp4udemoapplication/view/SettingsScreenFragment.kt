@@ -1,5 +1,7 @@
 package com.taboola.hp4udemoapplication.view
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -7,7 +9,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -57,9 +58,19 @@ class SettingsScreenFragment: Fragment() {
                 //Start activity
                 model.reportTaboolaUsageEventPerSession()
             } else {
-                Toast.makeText(requireContext(), "You have not filled out all required fields", Toast.LENGTH_SHORT).show()
+                showEmptyFieldsAlertDialog()
             }
         }
+    }
+
+    private fun showEmptyFieldsAlertDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Error")
+            .setMessage("Please fill in all required fields")
+            .setNeutralButton("Ok", DialogInterface.OnClickListener {dialogInterface, i ->
+                dialogInterface.dismiss()
+            })
+            .show()
     }
 
     private fun setupEditTextValidation(model: SharedViewModel) {
@@ -75,10 +86,7 @@ class SettingsScreenFragment: Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                    when(model.isTextValid(p0)) {
-                        false -> binding.publisherEt.error = "Your input is wrong"
-                        true -> model.setUserInput(binding.publisherEt.id, p0.toString())
-                    }
+                    model.setUserInput(binding.publisherEt.id, p0.toString())
                 }
             }
         })
@@ -94,10 +102,7 @@ class SettingsScreenFragment: Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                    when(model.isTextValid(p0)) {
-                        false -> binding.apiKeyEt.error = "Your input is wrong"
-                        true -> model.setUserInput(binding.apiKeyEt.id, p0.toString())
-                    }
+                     model.setUserInput(binding.apiKeyEt.id, p0.toString())
                 }
             }
         })
