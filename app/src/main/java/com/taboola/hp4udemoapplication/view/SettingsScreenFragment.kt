@@ -55,6 +55,7 @@ class SettingsScreenFragment : Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
+                model.preload()
                 model.switchFragment(requireActivity(), HomePageScreenFragment())
             } else {
                 showEmptyFieldsAlertDialog()

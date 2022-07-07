@@ -1,13 +1,10 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.TBLPublisherInfo
@@ -37,12 +34,6 @@ class SharedViewModel : ViewModel() {
         homePage = Taboola.getHomePage(
             "home", "https://www.sdktesterhp4udemo.com",
             object : TBLHomePageListener() {
-
-                override fun onHomePageError(error: String?, sectionName: String?) {
-                    super.onHomePageError(error, sectionName)
-                    Log.d("SLAVA", error + "")
-                }
-
                 override fun onHomePageItemClick(
                     sectionName: String?,
                     itemId: String?,
@@ -102,10 +93,13 @@ class SharedViewModel : ViewModel() {
         toolbar.setTitleTextAppearance(toolbar.context, resId)
     }
 
-    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
-        if (fragmentToSwitch is HomePageScreenFragment && isPreloadChecked) {
+    fun preload() {
+        if (isPreloadChecked) {
             homePage?.fetchContent()
         }
+    }
+
+    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
         fragmentActivity.supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
