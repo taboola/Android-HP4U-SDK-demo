@@ -1,10 +1,14 @@
 package com.taboola.hp4udemoapplication.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import com.taboola.android.Taboola
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
+import com.taboola.hp4udemoapplication.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel: ViewModel() {
@@ -13,6 +17,7 @@ class SharedViewModel: ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
+    private var wasUsageEventFired = false
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when(switchId) {
@@ -57,5 +62,21 @@ class SharedViewModel: ViewModel() {
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
         fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
+    }
+
+    private fun createDataMapForEvent(eventKey : String, eventValue : String): HashMap<String, String> {
+        val data: HashMap<String, String> = HashMap()
+        data[eventKey] = eventValue
+        return data
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun reportTaboolaUsageEventPerSession(){
+        if(!wasUsageEventFired){
+            val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT_KEY, HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT)
+            val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT, dataForUsageEvent)
+            Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
+            wasUsageEventFired = true
+        }
     }
 }
