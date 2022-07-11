@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:text="Account"
-        android:textColor="@color/black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginStart="20dp"
@@ -44,7 +44,7 @@
             android:layout_marginStart="25sp"
             android:layout_marginTop="8sp"
             android:text="Publisher"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="20sp">
 
         </TextView>
@@ -56,7 +56,7 @@
             android:layout_marginStart="50sp"
             android:layout_marginEnd="20sp"
             android:hint="Enter Publisher Name"
-            android:textColor="@color/black">
+            android:textColor="?android:textColorPrimary">
         </EditText>
     </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:layout_marginStart="25sp"
             android:layout_marginTop="8sp"
             android:text="API Key"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="20sp">
         </TextView>
 
@@ -88,7 +88,7 @@
             android:layout_marginEnd="20sp"
             android:lines="2"
             android:hint="Enter API Key"
-            android:textColor="@color/black">
+            android:textColor="?android:textColorPrimary">
         </EditText>
     </LinearLayout>
 
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Loading (choose one of the following)"
-        android:textColor="@color/black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,7 +127,7 @@
             android:gravity="start"
             android:layout_marginStart="20dp"
             android:text="Preload"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="20sp">
         </TextView>
 
@@ -160,7 +160,7 @@
             android:gravity="start"
             android:layout_marginStart="20dp"
             android:text="Lazy load"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="20sp">
         </TextView>
 
@@ -199,7 +199,7 @@
         android:backgroundTint="#FF3B30"
         android:text="Launch Demo!"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="?android:textColorPrimary"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
