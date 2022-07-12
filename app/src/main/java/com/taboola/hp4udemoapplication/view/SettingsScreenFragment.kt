@@ -54,6 +54,7 @@ class SettingsScreenFragment : Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
+                model.reportTaboolaUsageEventPerSession()
                 model.switchFragment(requireActivity(), HomePageScreenFragment())
             } else {
                 showEmptyFieldsAlertDialog()
