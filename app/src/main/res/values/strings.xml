@@ -1,14 +1,13 @@
 <resources>
-    <string name="app_name">HP4U Demo Application</string>
+    <string name="app_name">News</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about_fragment">About This Demo</string>
     <string name="article_url">Article URL</string>
     <string name="informative_text">Dear Publisher, We are excited to potentially work with you as a design partner,
-        to bring Homepage For You and its benefits to your mobile app (in addition to your desktop and mobile web view platforms).\n
-        To evaluate the possibility of using Taboola Homepage For You in your mobile applications,
+        to bring Homepage For You and its benefits to your mobile app (in addition to your desktop and mobile web view platforms).\nTo evaluate the possibility of using Taboola Homepage For You in your mobile applications,
         we prepared the current demo project that you\'re using.
-        In addition to the demo project and the enclosed documention,
+        In addition to the demo project and the enclosed documentation,
         here are the requirements for moving forward:\n \n
         - The homepage/section screen developed in native Android/iOS solution (no Flutter/React-native)\n \n
         - Integrate Taboola mobile SDK 3\n \n
@@ -18,13 +17,10 @@
         - We require a dedicated mobile developer to work with us on a daily/regular basis, preferably using a shared Slack channel.\n \n
         And here are a few technical points to consider:\n \n
         - We prefer working on the iOS and Android app at the same time\n \n
-        - Currently, in our beta phase, we are focusing on replacing homepage items with ONLY title text, content text, and a thumbnail image.\n \n
-        Items with additional functionality, like the share button, video player,etc. will be handled by you For example, if an item include a share icon, the actual share functionality is controlled by you.\n
-        \n The mobile app should be similar in terms of UI to the mobile web as much as possible to allow control over the SDK features and debugging. \n \n
-        Looking forward to hearing from you, and talking through any questions, feedback, or concerns.
-        Feel free to reach out at android.sdk@taboola.compiling \n \n
-        Please note that using the demo project is subject to Taboola terms of use, privacy policy and business agreements.
-       Please do not share it with any 3rd party. Taboola sends a beacon to itself on usage of this demo. \n \n Taboola Mobile Team</string>
+        - Currently, in our beta phase, we are focusing on replacing homepage items with ONLY title text, content text, and a thumbnail image.\n \nItems with additional functionality, like the share button, video player,etc. will be handled by you For example, if an item include a share icon, the actual share functionality is controlled by you.\n
+        \n The mobile app should be similar in terms of UI to the mobile web as much as possible to allow control over the SDK features and debugging. \n \nLooking forward to hearing from you, and talking through any questions, feedback, or concerns.
+        Feel free to reach out at android.sdk@taboola.compiling \n \nPlease note that using the demo project is subject to Taboola terms of use, privacy policy and business agreements.
+       Please do not share it with any 3rd party. Taboola sends a beacon to itself on usage of this demo. \n \nTaboola Mobile Team</string>
 
     <string name="lorem_ipsum_huge">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla maximus nibh quis ipsum feugiat vulputate vitae et felis. In fringilla, urna eu dignissim volutpat, sem felis hendrerit libero, nec condimentum mi neque iaculis tortor. Praesent eu justo sem. Ut nec congue lorem. Nam feugiat ipsum sapien, ac posuere neque efficitur sit amet. Sed nunc tellus, tempus cursus leo quis, varius porta libero. Donec elementum quis quam id tincidunt.
@@ -45,4 +41,5 @@
         \n\nNam eget sagittis elit. Suspendisse et velit ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquam blandit iaculis. Aliquam tempus gravida maximus. Mauris diam elit, ornare et consectetur sed, tempor sit amet sem. Vivamus nisl massa, rhoncus sed laoreet nec, congue ut mi. Morbi in arcu laoreet urna viverra venenatis. Etiam egestas luctus feugiat. Praesent auctor quis libero eu ultrices.
         \n\nSuspendisse urna tortor, tempus sit amet elit in, posuere porttitor dui. Sed sollicitudin convallis odio, sit amet ornare justo feugiat sit amet. Integer eu scelerisque enim, tempus sagittis massa. Proin vel metus id augue sollicitudin suscipit. Nulla ultrices, nisl in ornare sollicitudin, sapien nunc consectetur dui, eu lobortis nisi ipsum non nunc. Quisque et massa urna. Sed quam purus, pretium ac ex nec, tempor placerat mauris.
     </string>
+    <string name="swapped">Swapped</string>
 </resources>

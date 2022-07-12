@@ -2,7 +2,6 @@ package com.taboola.hp4udemoapplication.view
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,7 +17,7 @@ import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 
-class SettingsScreenFragment: Fragment() {
+class SettingsScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -55,8 +54,8 @@ class SettingsScreenFragment: Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
-                //Start activity
                 model.reportTaboolaUsageEventPerSession()
+                model.switchFragment(requireActivity(), HomePageScreenFragment())
             } else {
                 showEmptyFieldsAlertDialog()
             }
@@ -67,7 +66,7 @@ class SettingsScreenFragment: Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Error")
             .setMessage("Please fill in all required fields")
-            .setNeutralButton("Ok", DialogInterface.OnClickListener {dialogInterface, i ->
+            .setNeutralButton("Ok", DialogInterface.OnClickListener { dialogInterface, i ->
                 dialogInterface.dismiss()
             })
             .show()
@@ -75,7 +74,7 @@ class SettingsScreenFragment: Fragment() {
 
     private fun setupEditTextValidation(model: SharedViewModel) {
 
-        binding.publisherEt.addTextChangedListener(object: TextWatcher {
+        binding.publisherEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -91,7 +90,7 @@ class SettingsScreenFragment: Fragment() {
             }
         })
 
-        binding.apiKeyEt.addTextChangedListener(object: TextWatcher {
+        binding.apiKeyEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -102,7 +101,7 @@ class SettingsScreenFragment: Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                     model.setUserInput(binding.apiKeyEt.id, p0.toString())
+                    model.setUserInput(binding.apiKeyEt.id, p0.toString())
                 }
             }
         })
@@ -132,7 +131,9 @@ class SettingsScreenFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        model.setToolbarTitle(requireActivity(), "Demo Settings")
-        model.setToolbarTitleColor(toolbar, Color.RED)
+        model.apply {
+            setToolbarTitle(requireActivity(), "Demo Settings")
+            setToolbarTitleTextAppearance(toolbar, R.style.RobotTextAppearance)
+        }
     }
 }

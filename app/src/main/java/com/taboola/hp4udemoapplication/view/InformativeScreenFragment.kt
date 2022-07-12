@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentInformativesScreenBinding
+import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 
 class InformativeScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentInformativesScreenBinding
+    private val model: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,5 +28,10 @@ class InformativeScreenFragment : Fragment() {
         //Making the textView scrollable
         binding.informativeTv.movementMethod = ScrollingMovementMethod()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        model.setToolbarTitle(requireActivity(),getString(R.string.about_fragment))
     }
 }

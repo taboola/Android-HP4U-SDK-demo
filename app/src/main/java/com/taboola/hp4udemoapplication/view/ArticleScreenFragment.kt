@@ -34,16 +34,15 @@ class ArticleScreenFragment : Fragment() {
 
         // Inflate the layout for this fragment
         binding =  FragmentArticleScreenBinding.inflate(layoutInflater, container, false)
-        binding.articleUrl.setText(tblClickedItemUrl)
+        binding.articleUrl.text = tblClickedItemUrl
         model.setToolbarTitle(requireActivity(),SCREEN_TOOLBAR_TITLE)
-        binding.loremIpsumHuge.movementMethod = ScrollingMovementMethod()
 
         return binding.root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(tblClickedItemUrl: String) =
+        fun newInstance(tblClickedItemUrl: String?) =
             ArticleScreenFragment().apply {
                 arguments = Bundle().apply {
                     putString(TBL_CLICKED_ITEM_URL, tblClickedItemUrl)

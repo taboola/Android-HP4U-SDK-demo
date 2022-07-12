@@ -16,4 +16,18 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorPrimary">@color/black</item>
     </style>
+
+    <style name="NoticeTextAppearance">
+        <item name="android:fontFamily">@font/noticiatext_regular</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RobotTextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
