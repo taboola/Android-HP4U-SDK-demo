@@ -6,12 +6,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
-class SharedViewModel: ViewModel() {
+class SharedViewModel : ViewModel() {
 
     private var isPreloadChecked: Boolean = false
     private var isLazyLoadChecked: Boolean = false
@@ -19,8 +20,16 @@ class SharedViewModel: ViewModel() {
     private var apiKey: String = ""
     private var wasUsageEventFired = false
 
+    init {
+        Taboola.init(
+            TBLPublisherInfo(HP4UDemoConstants.DEFAULT_PUBLISHER_NAME).setApiKey(
+                HP4UDemoConstants.DEFAULT_API_KEY
+            )
+        )
+    }
+
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
-        when(switchId) {
+        when (switchId) {
             R.id.preload_switch -> {
                 isPreloadChecked = checkedState
                 isLazyLoadChecked = !checkedState
@@ -33,7 +42,7 @@ class SharedViewModel: ViewModel() {
     }
 
     fun setUserInput(editTextId: Int, input: String) {
-        when(editTextId) {
+        when (editTextId) {
             R.id.publisher_et -> publisherName = input
             R.id.api_key_et -> apiKey = input
         }
@@ -51,17 +60,20 @@ class SharedViewModel: ViewModel() {
         return true
     }
 
-    fun setToolbarTitle(activity: FragmentActivity, toolbarTitle:String) {
+    fun setToolbarTitle(activity: FragmentActivity, toolbarTitle: String) {
         val appCompatActivity = activity as AppCompatActivity
         appCompatActivity.supportActionBar?.title = toolbarTitle
     }
 
-    fun setToolbarTitleColor(toolbar: Toolbar, color: Int) {
-        toolbar.setTitleTextColor(color)
+    fun setToolbarTitleTextAppearance(toolbar: Toolbar, resId: Int) {
+        toolbar.setTitleTextAppearance(toolbar.context, resId)
     }
 
-    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment){
-        fragmentActivity.supportFragmentManager.beginTransaction().replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
+    fun isPreloadChecked() = isPreloadChecked
+
+    fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
+        fragmentActivity.supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
     }
 
     private fun createDataMapForEvent(eventKey : String, eventValue : String): HashMap<String, String> {
