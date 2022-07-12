@@ -19,14 +19,16 @@ class ArticleDiffCallback(
         oldArticles[oldItemPosition].type == newArticles[newItemPosition].type
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return if (oldArticles[oldItemPosition].type == HEADER_TYPE) {
-            (oldArticles[oldItemPosition] as Header).title.equals((newArticles[newItemPosition] as Header))
+        val oldItem = oldArticles[oldItemPosition]
+        val newItem = newArticles[newItemPosition]
+        return if (oldItem.type == HEADER_TYPE) {
+            (oldItem as Header).title == (newItem as Header).title
         } else {
-            ((oldArticles[oldItemPosition] as Article).title == (newArticles[newItemPosition] as Article).title
-                    && (oldArticles[oldItemPosition] as Article).content == (newArticles[newItemPosition] as Article).content
-                    && (oldArticles[oldItemPosition] as Article).imageUrl == (newArticles[newItemPosition] as Article).imageUrl
-                    && (oldArticles[oldItemPosition] as Article).url == (newArticles[newItemPosition] as Article).url
-                    && (oldArticles[oldItemPosition] as Article).category == (newArticles[newItemPosition] as Article).category)
+            ((oldItem as Article).title == (newItem as Article).title
+                    && oldItem.content == newItem.content
+                    && oldItem.imageUrl == newItem.imageUrl
+                    && oldItem.url == newItem.url
+                    && oldItem.category == newItem.category)
         }
     }
 }

@@ -2,7 +2,6 @@ package com.taboola.hp4udemoapplication.view
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -55,7 +54,6 @@ class SettingsScreenFragment : Fragment() {
 
         binding.launchDemoBtn.setOnClickListener {
             if (model.isAllInputValid()) {
-                model.preload()
                 model.switchFragment(requireActivity(), HomePageScreenFragment())
             } else {
                 showEmptyFieldsAlertDialog()
@@ -67,7 +65,7 @@ class SettingsScreenFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Error")
             .setMessage("Please fill in all required fields")
-            .setNeutralButton("Ok", DialogInterface.OnClickListener {dialogInterface, i ->
+            .setNeutralButton("Ok", DialogInterface.OnClickListener { dialogInterface, i ->
                 dialogInterface.dismiss()
             })
             .show()
@@ -102,7 +100,7 @@ class SettingsScreenFragment : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 p0?.let {
-                     model.setUserInput(binding.apiKeyEt.id, p0.toString())
+                    model.setUserInput(binding.apiKeyEt.id, p0.toString())
                 }
             }
         })
@@ -132,7 +130,9 @@ class SettingsScreenFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        model.setToolbarTitle(requireActivity(), "Demo Settings")
-        model.setToolbarTitleTextAppearance(toolbar, R.style.RobotTextAppearance)
+        model.apply {
+            setToolbarTitle(requireActivity(), "Demo Settings")
+            setToolbarTitleTextAppearance(toolbar, R.style.RobotTextAppearance)
+        }
     }
 }

@@ -4,17 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
-import com.taboola.android.homepage.TBLHomePage
-import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.SingleLiveEvent
-import com.taboola.hp4udemoapplication.view.HomePageScreenFragment
 
 class SharedViewModel : ViewModel() {
 
@@ -22,8 +16,6 @@ class SharedViewModel : ViewModel() {
     private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
-    private var homePage: TBLHomePage? = null
-    private var itemClicked = SingleLiveEvent<String?>()
 
     init {
         Taboola.init(
@@ -31,26 +23,7 @@ class SharedViewModel : ViewModel() {
                 HP4UDemoConstants.DEFAULT_API_KEY
             )
         )
-        homePage = Taboola.getHomePage(
-            "home", "https://www.sdktesterhp4udemo.com",
-            object : TBLHomePageListener() {
-                override fun onHomePageItemClick(
-                    sectionName: String?,
-                    itemId: String?,
-                    clickUrl: String?,
-                    isOrganic: Boolean,
-                    customData: String?
-                ): Boolean {
-                    itemClicked.value = clickUrl
-                    return false
-                }
-            }, "sport", "technology", "topnews"
-        )
     }
-
-    fun itemClicked(): LiveData<String?> = itemClicked
-
-    fun getHomePage(): TBLHomePage? = homePage
 
     fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
         when (switchId) {
@@ -93,18 +66,10 @@ class SharedViewModel : ViewModel() {
         toolbar.setTitleTextAppearance(toolbar.context, resId)
     }
 
-    fun preload() {
-        if (isPreloadChecked) {
-            homePage?.fetchContent()
-        }
-    }
+    fun isPreloadChecked() = isPreloadChecked
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
         fragmentActivity.supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragmentToSwitch).addToBackStack(null).commit()
-    }
-
-    fun setupHomePage(homepageRecyclerview: RecyclerView) {
-        homePage?.attach(homepageRecyclerview)
     }
 }

@@ -49,7 +49,6 @@ class HomePageAdapter(
                 }
                 return viewHolder
             }
-
             HEADER -> HeaderViewHolder(view)
             else -> throw IllegalArgumentException("Invalid type")
         }
@@ -100,7 +99,7 @@ class HomePageAdapter(
         private const val DEFAULT_ARTICLE = 2
     }
 
-    public interface OnItemClickListener {
+    interface OnItemClickListener {
         fun onClick(url: String)
     }
 }
