@@ -21,7 +21,7 @@
             android:maxLines="3"
             android:text="@string/article_url"
             android:textSize="25sp"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?android:textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
