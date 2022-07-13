@@ -12,4 +12,5 @@
     <color name="swapped">#FF3B30</color>
     <color name="red">#FF3B30</color>
     <color name="swapped_semi_transparent">#B3FF3B30</color>
+    <color name="dark_gray">#5C5C5C</color>
 </resources>
