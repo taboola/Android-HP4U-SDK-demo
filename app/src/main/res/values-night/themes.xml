@@ -17,6 +17,8 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/dark_gray</item>
         <item name="dividerColor">@color/dark_gray</item>
+        <item name="toolbarBackgroundColor">#121212</item>
+
 
     </style>
 </resources>
