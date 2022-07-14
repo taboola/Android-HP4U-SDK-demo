@@ -177,7 +177,7 @@
 
     <Button
         android:id="@+id/demo_information_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#E9E9EB"
         android:text="Demo Information"
@@ -194,7 +194,7 @@
 
     <Button
         android:id="@+id/launch_demo_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF3B30"
         android:text="Launch Demo!"
