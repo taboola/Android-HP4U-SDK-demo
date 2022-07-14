@@ -199,7 +199,7 @@
         android:backgroundTint="#FF3B30"
         android:text="Launch Demo!"
         android:textAllCaps="false"
-        android:textColor="?android:textColorPrimary"
+        android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
