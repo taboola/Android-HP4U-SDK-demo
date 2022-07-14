@@ -12,6 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+        <item name="dividerColor">@color/divider</item>
+        <item name="toolbarBackgroundColor">@color/white</item>
+        <item name="buttonBackgroundColor">#E9E9EB</item>
     </style>
 
     <style name="NoticeTextAppearance">

@@ -30,7 +30,7 @@
         android:text="Taboola “HomePage For You” Demo
         Using this app is subject to Taboola Terms, Legal contract, and Business terms.\nFor questions, comments, and feedback, please reach out to\n android.sdk@taboola.com"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="?android:textColorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
