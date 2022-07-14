@@ -18,6 +18,7 @@
         <item name="android:textColorSecondary">@color/gray</item>
         <item name="dividerColor">@color/divider</item>
         <item name="toolbarBackgroundColor">@color/white</item>
+        <item name="buttonBackgroundColor">#E9E9EB</item>
     </style>
 
     <style name="NoticeTextAppearance">

@@ -3,4 +3,7 @@
     <declare-styleable name="androidx.appcompat.widget.Toolbar">
         <attr name="toolbarBackgroundColor" format="reference|color"/>
     </declare-styleable>
+    <declare-styleable name="Button">
+        <attr name="buttonBackgroundColor" format="reference|color"/>
+    </declare-styleable>
 </resources>
