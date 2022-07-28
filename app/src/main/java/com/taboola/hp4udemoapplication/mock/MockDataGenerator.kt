@@ -158,10 +158,10 @@ class MockDataGenerator {
             )
             data.add(
                 Article(
-                    "Defending champ Korda grabs LPGA lead in Michigan",
-                    "Defending champion Nelly Korda curled in an eagle putt at the 18th hole on Saturday to grab a one-shot lead over Jennifer Kupcho heading into the final round of the Meijer LPGA Classic in Michigan. Former world number one Korda started the day two off Kupcho's lead and carded a six-under par 66",
-                    "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_auto%2Cq_100%2Ch_916%2Cw_856%2Cc_fill%2Cg_faces:auto/https%3A//afp-apicore-prod.afp.com/objects/api/medias%3Fid%3Da1kkIS0nShZCWFQsV0haUEVDAkheKjZCSh0GdQdqAXN8HQYGawV4and0emsZcAFocFlRWAIBAHBfIippXFQaK0ciDyAsVgxxCHsOBwUSCwFyd2gMZh8EBwAWWFFSeCxETxxbZAVwBHMxU1NfK1ggaycpVB9YWFd4V0hDRl9cQFVSayNLSRxXLlprAnN3AAEGdQwVd3Z1Dg0UbBYhVk4ZBgBTXwxQfGRcUFYJIlMifgp9U1cWNlstIHkuUF5FUl0jH0hMRVtCSEsLdHQYAQMMdQd3CHdxARdTMAlx.jpg",
-                    "https://taboolanews.com/article/812f9e0e-d65a-d218-375c-08eb934435ec",
+                    "Climate change and vanishing islands threaten brown pelicans",
+                    "CHAUVIN, La. Sliding off the side of her small boat, seabird biologist Bonnie Slaton wades through waist-high water, brown pelicans soaring overhead, until she reaches Raccoon Island.",
+                    "https://images.taboola.com/taboola/image/fetch/f_jpg%2Cq_70%2Ch_340%2Cw_567%2Cc_fill%2Cg_faces:auto%2Ce_sharpen/https://www.mcclatchy-wires.com/incoming/4boqh9/picture263865542/alternates/LANDSCAPE_1140/Pelicans_Vanishing_Islands_27580.jpg",
+                    "https://taboolanews.com/summary-page/-7231399208478792849",
                     CATEGORY_3,
                     HP4UDemoConstants.SECTION_3_NAME
                 )
