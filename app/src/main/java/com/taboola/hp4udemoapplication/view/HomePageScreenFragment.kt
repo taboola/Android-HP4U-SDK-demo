@@ -88,9 +88,6 @@ class HomePageScreenFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        homePage?.let {
-            it.clear()
-            homePage = null
-        }
+        homePage = null
     }
 }
