@@ -38,7 +38,7 @@ class HomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
             animatedBackgroundTextView?.visibility = View.GONE
             title?.text = article.title
             content?.text = article.content
-            if (article.imageUrl.isNotEmpty()) {
+            if (article.imageUrl != 0) {
                 Picasso.get().load(article.imageUrl).into(image)
             }
         } else {

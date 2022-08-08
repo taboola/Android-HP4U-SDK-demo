@@ -22,8 +22,8 @@ class MainHomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
     fun onBind(article: Article) {
         title?.text = article.title
         content?.text = article.content
-        if (article.imageUrl.isNotEmpty()) {
-            Picasso.get().load(article.imageUrl).error(R.mipmap.ic_launcher).into(image)
+        if (article.imageUrl != 0) {
+            Picasso.get().load(article.imageUrl).into(image)
         }
     }
 }
