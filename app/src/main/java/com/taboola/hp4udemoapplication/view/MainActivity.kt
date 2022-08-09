@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
             it.setDisplayShowHomeEnabled(true)
         }
 
-        val mem: Int = Runtime.getRuntime().maxMemory().toInt()
+        val maximumMemorySizeForLruCache: Int = Runtime.getRuntime().maxMemory().toInt()
         picasso = Picasso.Builder(applicationContext)
-            .memoryCache(LruCache(mem))
+            .memoryCache(LruCache(maximumMemorySizeForLruCache))
             .build()
         Picasso.setSingletonInstance(picasso)
 
