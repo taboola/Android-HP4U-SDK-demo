@@ -1,15 +1,14 @@
 package com.taboola.hp4udemoapplication.adapters.articles
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.data.Article
-import com.taboola.hp4udemoapplication.data.BaseItem
-import com.taboola.hp4udemoapplication.data.Header
+import com.taboola.hp4udemoapplication.model.Article
+import com.taboola.hp4udemoapplication.model.BaseItem
+import com.taboola.hp4udemoapplication.model.Header
 
 class HomePageAdapter(
     private var homePage: TBLHomePage?,

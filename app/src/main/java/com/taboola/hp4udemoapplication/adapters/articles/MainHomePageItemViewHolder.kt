@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.data.Article
+import com.taboola.hp4udemoapplication.model.Article
 
 class MainHomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
