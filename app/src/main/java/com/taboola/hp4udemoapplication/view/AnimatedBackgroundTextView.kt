@@ -4,11 +4,8 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.animation.Animation
 import androidx.core.content.ContextCompat
 import com.taboola.hp4udemoapplication.R
-
 
 class AnimatedBackgroundTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
