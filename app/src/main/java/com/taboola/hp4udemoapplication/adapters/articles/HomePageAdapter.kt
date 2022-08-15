@@ -75,10 +75,11 @@ class HomePageAdapter(
         if (position == 0) {
             return MAIN_ARTICLE
         }
-        return if (data[position].type == BaseItem.HEADER_TYPE)
-            HEADER
-        else
-            DEFAULT_ARTICLE
+
+        return when(data[position].type == BaseItem.HEADER_TYPE) {
+            true -> HEADER
+            false -> DEFAULT_ARTICLE
+        }
     }
 
     override fun getItemCount(): Int = data.size
