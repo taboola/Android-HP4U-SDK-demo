@@ -30,7 +30,7 @@ class HomePageAdapter(
             .from(parent.context)
             .inflate(layout, parent, false)
 
-        return when (viewType) {
+        when (viewType) {
             MAIN_ARTICLE -> {
                 val mainItemViewHolder = MainHomePageItemViewHolder(view)
                 view.setOnClickListener {
@@ -40,7 +40,6 @@ class HomePageAdapter(
                 return mainItemViewHolder
             }
             DEFAULT_ARTICLE -> {
-
                 val viewHolder = HomePageItemViewHolder(view)
                 view.setOnClickListener {
                     val url = (data[viewHolder.adapterPosition] as Article).url
@@ -48,7 +47,7 @@ class HomePageAdapter(
                 }
                 return viewHolder
             }
-            HEADER -> HeaderViewHolder(view)
+            HEADER -> return HeaderViewHolder(view)
             else -> throw IllegalArgumentException("Invalid type")
         }
     }
