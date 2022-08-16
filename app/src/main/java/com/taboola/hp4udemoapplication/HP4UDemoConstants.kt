@@ -18,5 +18,6 @@ object HP4UDemoConstants {
 
     const val ARTICLE_SCREEN_TOOLBAR_TITLE = "Article Screen"
     const val NEWS_SCREEN_TOOLBAR_TITLE = "News"
+    const val DEMO_SETTINGS_SCREEN_TOOLBAR_TITLE = "Demo Settings"
 
 }
