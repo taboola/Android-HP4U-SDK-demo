@@ -16,7 +16,7 @@ import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.adapters.articles.HomePageAdapter
 import com.taboola.hp4udemoapplication.databinding.FragmentHomePageScreenBinding
-import com.taboola.hp4udemoapplication.mock.MockDataGenerator
+import com.taboola.hp4udemoapplication.repository.MockDataGenerator
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 class HomePageScreenFragment : Fragment() {
