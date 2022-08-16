@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.homepage.TBLHomePage
+import com.taboola.hp4udemoapplication.OnItemClickListener
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.model.Article
 import com.taboola.hp4udemoapplication.model.BaseItem
@@ -15,6 +16,12 @@ class HomePageAdapter(
     private val onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        private const val HEADER = 0
+        private const val MAIN_ARTICLE = 1
+        private const val DEFAULT_ARTICLE = 2
+    }
 
     private val data = ArrayList<BaseItem>()
 
@@ -90,15 +97,5 @@ class HomePageAdapter(
         data.clear()
         data.addAll(newData)
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    companion object {
-        private const val HEADER = 0
-        private const val MAIN_ARTICLE = 1
-        private const val DEFAULT_ARTICLE = 2
-    }
-
-    interface OnItemClickListener {
-        fun onClick(url: String)
     }
 }
