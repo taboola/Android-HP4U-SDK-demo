@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.taboola.android.homepage.TBLHomePage
-import com.taboola.hp4udemoapplication.OnItemClickListener
+import com.taboola.hp4udemoapplication.HomePageItemClickListener
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.model.Article
 import com.taboola.hp4udemoapplication.model.BaseItem
@@ -13,7 +13,7 @@ import com.taboola.hp4udemoapplication.model.Header
 
 class HomePageAdapter(
     private var homePage: TBLHomePage?,
-    private val onItemClickListener: OnItemClickListener
+    private val onItemClickListener: HomePageItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

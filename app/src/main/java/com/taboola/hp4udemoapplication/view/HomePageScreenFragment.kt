@@ -13,6 +13,7 @@ import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
+import com.taboola.hp4udemoapplication.HomePageItemClickListener
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.adapters.articles.HomePageAdapter
 import com.taboola.hp4udemoapplication.databinding.FragmentHomePageScreenBinding
@@ -63,7 +64,7 @@ class HomePageScreenFragment : Fragment() {
         }
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
-            HomePageAdapter(homePage, object : HomePageAdapter.OnItemClickListener {
+            HomePageAdapter(homePage, object : HomePageItemClickListener {
                 override fun onClick(url: String) {
                     Log.d("HomePageScreenFragment", "Article item clicked $url");
                     model.switchFragment(requireActivity(), ArticleScreenFragment.newInstance(url))
