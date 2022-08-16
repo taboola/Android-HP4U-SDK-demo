@@ -1,10 +1,10 @@
-package com.taboola.hp4udemoapplication.mock
+package com.taboola.hp4udemoapplication.repository
 
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.data.Article
-import com.taboola.hp4udemoapplication.data.BaseItem
-import com.taboola.hp4udemoapplication.data.Header
+import com.taboola.hp4udemoapplication.model.Article
+import com.taboola.hp4udemoapplication.model.BaseItem
+import com.taboola.hp4udemoapplication.model.Header
 
 class MockDataGenerator {
 

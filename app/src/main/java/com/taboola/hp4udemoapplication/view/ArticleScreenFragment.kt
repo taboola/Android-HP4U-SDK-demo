@@ -1,17 +1,14 @@
 package com.taboola.hp4udemoapplication.view
 
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.databinding.FragmentArticleScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
-
-private const val TBL_CLICKED_ITEM_URL = "tblClickedItemUrl"
-private const val SCREEN_TOOLBAR_TITLE = "Article Screen"
 
 class ArticleScreenFragment : Fragment() {
 
@@ -23,7 +20,7 @@ class ArticleScreenFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            tblClickedItemUrl = it.getString(TBL_CLICKED_ITEM_URL)
+            tblClickedItemUrl = it.getString(HP4UDemoConstants.TBL_CLICKED_ITEM_URL_PREFIX)
         }
     }
 
@@ -35,7 +32,7 @@ class ArticleScreenFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =  FragmentArticleScreenBinding.inflate(layoutInflater, container, false)
         binding.articleUrl.text = tblClickedItemUrl
-        model.setToolbarTitle(requireActivity(),SCREEN_TOOLBAR_TITLE)
+        model.setToolbarTitle(requireActivity(), HP4UDemoConstants.ARTICLE_SCREEN_TOOLBAR_TITLE)
 
         return binding.root
     }
@@ -45,7 +42,7 @@ class ArticleScreenFragment : Fragment() {
         fun newInstance(tblClickedItemUrl: String?) =
             ArticleScreenFragment().apply {
                 arguments = Bundle().apply {
-                    putString(TBL_CLICKED_ITEM_URL, tblClickedItemUrl)
+                    putString(HP4UDemoConstants.TBL_CLICKED_ITEM_URL_PREFIX, tblClickedItemUrl)
                 }
             }
     }

@@ -13,13 +13,17 @@ import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
+import com.taboola.hp4udemoapplication.HomePageItemClickListener
 import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.adapters.articles.HomePageAdapter
 import com.taboola.hp4udemoapplication.databinding.FragmentHomePageScreenBinding
-import com.taboola.hp4udemoapplication.mock.MockDataGenerator
+import com.taboola.hp4udemoapplication.repository.MockDataGenerator
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
 class HomePageScreenFragment : Fragment() {
+
+    private val TAG = HomePageScreenFragment::class.java.simpleName
+
     private var homePage: TBLHomePage? = null
     private lateinit var binding: FragmentHomePageScreenBinding
     private val model: SharedViewModel by activityViewModels()
@@ -37,8 +41,8 @@ class HomePageScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         homePage = Taboola.getHomePage(
-            "home",
-            "https://www.sdktesterhp4udemo.com",
+            HP4UDemoConstants.HOME_PAGE_SOURCE_TYPE,
+            HP4UDemoConstants.HOME_PAGE_PAGE_URL,
             object : TBLHomePageListener() {
                 override fun onHomePageItemClick(
                     sectionName: String?,
@@ -63,9 +67,9 @@ class HomePageScreenFragment : Fragment() {
         }
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
-            HomePageAdapter(homePage, object : HomePageAdapter.OnItemClickListener {
+            HomePageAdapter(homePage, object : HomePageItemClickListener {
                 override fun onClick(url: String) {
-                    Log.d("HomePageScreenFragment", "Article item clicked $url");
+                    Log.d(TAG, "Article item clicked $url");
                     model.switchFragment(requireActivity(), ArticleScreenFragment.newInstance(url))
                 }
             })
@@ -81,7 +85,7 @@ class HomePageScreenFragment : Fragment() {
         super.onResume()
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         model.apply {
-            setToolbarTitle(requireActivity(), "News")
+            setToolbarTitle(requireActivity(), HP4UDemoConstants.NEWS_SCREEN_TOOLBAR_TITLE)
             setToolbarTitleTextAppearance(toolbar, R.style.NoticeTextAppearance)
         }
     }

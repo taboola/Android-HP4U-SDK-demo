@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.taboola.android.TBLPublisherInfo
 import com.taboola.android.Taboola
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
-import com.taboola.hp4udemoapplication.HP4UDemoUsageEvent
+import com.taboola.hp4udemoapplication.event.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel : ViewModel() {

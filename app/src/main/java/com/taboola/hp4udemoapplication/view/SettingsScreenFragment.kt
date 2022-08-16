@@ -16,7 +16,6 @@ import com.taboola.hp4udemoapplication.R
 import com.taboola.hp4udemoapplication.databinding.FragmentSettingsScreenBinding
 import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 
-
 class SettingsScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsScreenBinding
@@ -132,7 +131,7 @@ class SettingsScreenFragment : Fragment() {
         super.onResume()
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         model.apply {
-            setToolbarTitle(requireActivity(), "Demo Settings")
+            setToolbarTitle(requireActivity(), HP4UDemoConstants.DEMO_SETTINGS_SCREEN_TOOLBAR_TITLE)
             setToolbarTitleTextAppearance(toolbar, R.style.RobotTextAppearance)
         }
     }
