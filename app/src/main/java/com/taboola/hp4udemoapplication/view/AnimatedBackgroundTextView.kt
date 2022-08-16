@@ -30,11 +30,12 @@ class AnimatedBackgroundTextView @JvmOverloads constructor(
     }
 
     private fun startColorAnimation() {
-        colorAnimation.duration = 800 // milliseconds
-        colorAnimation.addUpdateListener { animator -> setBackgroundColor(animator.animatedValue as Int) }
-        colorAnimation.repeatCount = ValueAnimator.INFINITE
-        colorAnimation.repeatMode = ValueAnimator.REVERSE
-        colorAnimation.start()
+        colorAnimation.apply {
+            duration = 800 // milliseconds
+            addUpdateListener { animator -> setBackgroundColor(animator.animatedValue as Int) }
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            start()
+        }
     }
-
 }
