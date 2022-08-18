@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.taboola.android.homepage.TBLHomePage
 import com.taboola.hp4udemoapplication.R
-import com.taboola.hp4udemoapplication.data.Article
+import com.taboola.hp4udemoapplication.model.Article
 import com.taboola.hp4udemoapplication.view.AnimatedBackgroundTextView
 
 class HomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -4,11 +4,8 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.animation.Animation
 import androidx.core.content.ContextCompat
 import com.taboola.hp4udemoapplication.R
-
 
 class AnimatedBackgroundTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -33,11 +30,12 @@ class AnimatedBackgroundTextView @JvmOverloads constructor(
     }
 
     private fun startColorAnimation() {
-        colorAnimation.duration = 800 // milliseconds
-        colorAnimation.addUpdateListener { animator -> setBackgroundColor(animator.animatedValue as Int) }
-        colorAnimation.repeatCount = ValueAnimator.INFINITE
-        colorAnimation.repeatMode = ValueAnimator.REVERSE
-        colorAnimation.start()
+        colorAnimation.apply {
+            duration = 800 // milliseconds
+            addUpdateListener { animator -> setBackgroundColor(animator.animatedValue as Int) }
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            start()
+        }
     }
-
 }

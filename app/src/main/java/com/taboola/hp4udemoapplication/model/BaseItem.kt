@@ -1,4 +1,4 @@
-package com.taboola.hp4udemoapplication.data
+package com.taboola.hp4udemoapplication.model
 
  open class BaseItem(var type: Int) {
 
