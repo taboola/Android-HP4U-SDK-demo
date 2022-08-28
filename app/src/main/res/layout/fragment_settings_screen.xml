@@ -92,89 +92,6 @@
         </EditText>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/choose_setting_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Loading (choose one of the following)"
-        android:layout_marginStart="20dp"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/api_key_layout"
-        app:layout_constraintVertical_bias="0.068">
-    </TextView>
-
-    <LinearLayout
-        android:id="@+id/preload_switch_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_setting_tv"
-        app:layout_constraintVertical_bias="0.044">
-
-        <TextView
-            android:id="@+id/preload_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_marginStart="20dp"
-            android:text="Preload"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="20sp">
-        </TextView>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/preload_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_marginEnd="20dp"
-            android:minHeight="48dp"
-            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat">
-        </androidx.appcompat.widget.SwitchCompat>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lazy_load_switch_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preload_switch_layout"
-        app:layout_constraintVertical_bias="0.026">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:layout_marginStart="20dp"
-            android:text="Lazy load"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="20sp">
-        </TextView>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/lazy_load_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_marginEnd="20dp"
-            android:minHeight="48dp"
-            tools:viewBindingType="androidx.appcompat.widget.SwitchCompat">
-        </androidx.appcompat.widget.SwitchCompat>
-    </LinearLayout>
-
     <Button
         android:id="@+id/demo_information_btn"
         android:layout_width="350dp"
@@ -186,10 +103,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lazy_load_switch_layout"
-        app:layout_constraintVertical_bias="0.442">
+        app:layout_constraintTop_toBottomOf="@+id/api_key_layout">
     </Button>
 
     <Button
@@ -203,9 +118,10 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/demo_information_btn"
-        app:layout_constraintVertical_bias="0.144">
+        app:layout_constraintVertical_bias="0.161">
     </Button>
 
 

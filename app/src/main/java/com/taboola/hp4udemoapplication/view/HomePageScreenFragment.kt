@@ -62,9 +62,8 @@ class HomePageScreenFragment : Fragment() {
             HP4UDemoConstants.SECTION_2_NAME,
             HP4UDemoConstants.SECTION_3_NAME
         )
-        if (model.isPreloadChecked()) {
-            homePage?.fetchContent()
-        }
+
+        homePage?.fetchContent()
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
             HomePageAdapter(homePage, object : HomePageItemClickListener {

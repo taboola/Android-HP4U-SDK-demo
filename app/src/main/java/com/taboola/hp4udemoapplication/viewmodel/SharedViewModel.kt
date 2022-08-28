@@ -14,8 +14,6 @@ import com.taboola.hp4udemoapplication.R
 
 class SharedViewModel : ViewModel() {
 
-    private var isPreloadChecked: Boolean = false
-    private var isLazyLoadChecked: Boolean = false
     private var publisherName: String = ""
     private var apiKey: String = ""
     private var wasUsageEventFired = false
@@ -28,19 +26,6 @@ class SharedViewModel : ViewModel() {
         )
     }
 
-    fun setSwitchCheckedStatus(switchId: Int, checkedState: Boolean) {
-        when (switchId) {
-            R.id.preload_switch -> {
-                isPreloadChecked = checkedState
-                isLazyLoadChecked = !checkedState
-            }
-            R.id.lazy_load_switch -> {
-                isLazyLoadChecked = checkedState
-                isPreloadChecked = !checkedState
-            }
-        }
-    }
-
     fun setUserInput(editTextId: Int, input: String) {
         when (editTextId) {
             R.id.publisher_et -> publisherName = input
@@ -49,11 +34,6 @@ class SharedViewModel : ViewModel() {
     }
 
     fun isAllInputValid(): Boolean {
-        //One switch must be checked
-        if (!isPreloadChecked && !isLazyLoadChecked) {
-            return false
-        }
-
         if (publisherName.isEmpty() || apiKey.isEmpty()) {
             return false
         }
@@ -68,8 +48,6 @@ class SharedViewModel : ViewModel() {
     fun setToolbarTitleTextAppearance(toolbar: Toolbar, resId: Int) {
         toolbar.setTitleTextAppearance(toolbar.context, resId)
     }
-
-    fun isPreloadChecked() = isPreloadChecked
 
     fun switchFragment(fragmentActivity: FragmentActivity, fragmentToSwitch: Fragment) {
         fragmentActivity.supportFragmentManager.beginTransaction()
