@@ -2,13 +2,9 @@ package com.taboola.hp4udemoapplication.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.LruCache
-import com.squareup.picasso.Picasso
 import com.taboola.hp4udemoapplication.R
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var picasso: Picasso
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,12 +14,6 @@ class MainActivity : AppCompatActivity() {
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowHomeEnabled(true)
         }
-
-        val maximumMemorySizeForLruCache: Int = Runtime.getRuntime().maxMemory().toInt()
-        picasso = Picasso.Builder(applicationContext)
-            .memoryCache(LruCache(maximumMemorySizeForLruCache))
-            .build()
-        Picasso.setSingletonInstance(picasso)
 
         if(savedInstanceState == null) { // initial transaction should be wrapped like this
             supportFragmentManager.beginTransaction()
