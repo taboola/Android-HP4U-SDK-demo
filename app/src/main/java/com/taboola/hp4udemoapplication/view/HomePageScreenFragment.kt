@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.taboola.android.Taboola
 import com.taboola.android.homepage.TBLHomePage
+import com.taboola.android.homepage.TBLHomePageSettings
 import com.taboola.android.listeners.TBLHomePageListener
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.HomePageItemClickListener
@@ -40,9 +41,15 @@ class HomePageScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val tblHomePageSettings: TBLHomePageSettings?  =
+            TBLHomePageSettings.TBLHomePageSettingsBuilder(
+                HP4UDemoConstants.HOME_PAGE_SOURCE_TYPE,
+                HP4UDemoConstants.HOME_PAGE_PAGE_URL,
+                HP4UDemoConstants.SECTION_1_NAME,
+                HP4UDemoConstants.SECTION_2_NAME,
+                HP4UDemoConstants.SECTION_3_NAME).build()
         homePage = Taboola.getHomePage(
-            HP4UDemoConstants.HOME_PAGE_SOURCE_TYPE,
-            HP4UDemoConstants.HOME_PAGE_PAGE_URL,
+            tblHomePageSettings,
             object : TBLHomePageListener() {
                 override fun onHomePageItemClick(
                     sectionName: String?,
@@ -57,10 +64,7 @@ class HomePageScreenFragment : Fragment() {
                     )
                     return false
                 }
-            },
-            HP4UDemoConstants.SECTION_1_NAME,
-            HP4UDemoConstants.SECTION_2_NAME,
-            HP4UDemoConstants.SECTION_3_NAME
+            }
         )
 
         homePage?.fetchContent()
