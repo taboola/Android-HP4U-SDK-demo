@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
     implementation 'com.squareup.picasso:picasso:2.8'
     //Taboola SDK
-    implementation 'com.taboola:android-sdk:3.8.6'
+    implementation 'com.taboola:android-sdk:3.8.7'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
