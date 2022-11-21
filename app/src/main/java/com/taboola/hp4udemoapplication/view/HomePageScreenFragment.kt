@@ -41,13 +41,13 @@ class HomePageScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tblHomePageSettings: TBLHomePageSettings?  =
+        val tblHomePageSettings: TBLHomePageSettings =
             TBLHomePageSettings.TBLHomePageSettingsBuilder(
-                HP4UDemoConstants.HOME_PAGE_SOURCE_TYPE,
                 HP4UDemoConstants.HOME_PAGE_PAGE_URL,
                 HP4UDemoConstants.SECTION_1_NAME,
                 HP4UDemoConstants.SECTION_2_NAME,
-                HP4UDemoConstants.SECTION_3_NAME).build()
+                HP4UDemoConstants.SECTION_3_NAME).build() ?: return
+
         homePage = Taboola.getHomePage(
             tblHomePageSettings,
             object : TBLHomePageListener() {
@@ -64,10 +64,16 @@ class HomePageScreenFragment : Fragment() {
                     )
                     return false
                 }
+
+                override fun onHomePageStatusChanged(status: Boolean) {
+                    if (status) {
+                        homePage?.fetchContent()
+                    }
+                }
             }
         )
 
-        homePage?.fetchContent()
+
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
             HomePageAdapter(homePage, object : HomePageItemClickListener {
