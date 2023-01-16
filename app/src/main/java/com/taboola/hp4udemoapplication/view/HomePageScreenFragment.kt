@@ -64,15 +64,10 @@ class HomePageScreenFragment : Fragment() {
                     )
                     return false
                 }
-
-                override fun onHomePageStatusChanged(status: Boolean) {
-                    if (status) {
-                        homePage?.fetchContent()
-                    }
-                }
             }
         )
-
+        
+        homePage?.fetchContent()
 
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
