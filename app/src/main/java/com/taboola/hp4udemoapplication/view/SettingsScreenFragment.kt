@@ -51,9 +51,12 @@ class SettingsScreenFragment : Fragment() {
         }
 
         binding.launchDemoBtn.setOnClickListener {
+            val homePageFragment =
+                if (binding.demoRadioGroup.checkedRadioButtonId == binding.radioButtonSwappable.id) HomePageScreenFragment() else HomePageDataApiScreenFragment()
+
             if (model.isAllInputValid()) {
                 model.reportTaboolaUsageEventPerSession()
-                model.switchFragment(requireActivity(), HomePageScreenFragment())
+                model.switchFragment(requireActivity(), homePageFragment)
             } else {
                 showEmptyFieldsAlertDialog()
             }

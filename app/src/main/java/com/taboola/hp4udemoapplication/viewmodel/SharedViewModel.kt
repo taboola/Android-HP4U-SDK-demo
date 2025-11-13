@@ -11,12 +11,15 @@ import com.taboola.android.Taboola
 import com.taboola.hp4udemoapplication.HP4UDemoConstants
 import com.taboola.hp4udemoapplication.event.HP4UDemoUsageEvent
 import com.taboola.hp4udemoapplication.R
+import com.taboola.hp4udemoapplication.model.BaseItem
 
 class SharedViewModel : ViewModel() {
 
     private var publisherName: String = ""
     private var apiKey: String = ""
     private var wasUsageEventFired = false
+
+   val publisherData: MutableList<BaseItem> = mutableListOf()
 
     init {
         Taboola.init(
@@ -31,6 +34,15 @@ class SharedViewModel : ViewModel() {
             R.id.publisher_et -> publisherName = input
             R.id.api_key_et -> apiKey = input
         }
+    }
+
+    fun setPublisherDataList(list: List<BaseItem>) {
+        publisherData.clear()
+        publisherData.addAll(list)
+    }
+
+    fun getPublisherDataList(): List<BaseItem> {
+        return publisherData
     }
 
     fun isAllInputValid(): Boolean {
@@ -65,7 +77,7 @@ class SharedViewModel : ViewModel() {
         if(!wasUsageEventFired){
             val dataForUsageEvent : HashMap<String,String> = createDataMapForEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT_KEY, HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT)
             val homePageDemoUsedEvent = HP4UDemoUsageEvent(HP4UDemoConstants.HP4U_MOBILE_USAGE_EVENT, dataForUsageEvent)
-            Taboola.getTaboolaImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
+            Taboola.getTBLImpl().reportTaboolaEvent(null,homePageDemoUsedEvent)
             wasUsageEventFired = true
         }
     }

@@ -107,6 +107,33 @@
         app:layout_constraintTop_toBottomOf="@+id/api_key_layout">
     </Button>
 
+    <RadioGroup
+        android:id="@+id/demo_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/demo_information_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_button_swappable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FF3B30"
+            android:checked="true"
+            android:text="Home Page Swappable" />
+
+        <RadioButton
+            android:id="@+id/radio_button_data_api"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:buttonTint="#FF3B30"
+            android:text="Home Page Data API" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/launch_demo_btn"
         android:layout_width="350dp"
@@ -123,6 +150,5 @@
         app:layout_constraintTop_toBottomOf="@+id/demo_information_btn"
         app:layout_constraintVertical_bias="0.161">
     </Button>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

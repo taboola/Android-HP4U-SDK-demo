@@ -71,7 +71,7 @@ class HomePageScreenFragment : Fragment() {
 
         homePage?.attach(binding.homepageRecyclerview)
         val homePageAdapter =
-            HomePageAdapter(homePage, object : HomePageItemClickListener {
+            HomePageAdapter(homePage, false, object : HomePageItemClickListener {
                 override fun onClick(url: String) {
                     Log.d(TAG, "Article item clicked $url");
                     model.switchFragment(requireActivity(), ArticleScreenFragment.newInstance(url))

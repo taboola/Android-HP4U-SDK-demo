@@ -1,0 +1,196 @@
+package com.taboola.hp4udemoapplication.view
+
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.taboola.android.Taboola
+import com.taboola.android.homepage.TBLFetchContentCallback
+import com.taboola.android.homepage.TBLHomePage
+import com.taboola.android.homepage.TBLHomePageDataSource
+import com.taboola.android.homepage.TBLHomePageSettings
+import com.taboola.android.listeners.TBLHomePageListener
+import com.taboola.android.tblnative.TBLRecommendationHomePageDataApiItem
+import com.taboola.hp4udemoapplication.HP4UDemoConstants
+import com.taboola.hp4udemoapplication.HP4UDemoConstants.HOME_PAGE_PAGE_URL
+import com.taboola.hp4udemoapplication.HP4UDemoConstants.SECTION_1_NAME
+import com.taboola.hp4udemoapplication.HP4UDemoConstants.SECTION_2_NAME
+import com.taboola.hp4udemoapplication.HP4UDemoConstants.SECTION_3_NAME
+import com.taboola.hp4udemoapplication.HomePageItemClickListener
+import com.taboola.hp4udemoapplication.R
+import com.taboola.hp4udemoapplication.adapters.articles.HomePageAdapter
+import com.taboola.hp4udemoapplication.databinding.FragmentHomePageScreenBinding
+import com.taboola.hp4udemoapplication.model.Article
+import com.taboola.hp4udemoapplication.model.BaseItem
+import com.taboola.hp4udemoapplication.model.Header
+import com.taboola.hp4udemoapplication.repository.MockDataGenerator
+import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
+
+class HomePageDataApiScreenFragment : Fragment() {
+
+    private val TAG = HomePageDataApiScreenFragment::class.java.simpleName
+    private var homePage: TBLHomePage? = null
+    private lateinit var binding: FragmentHomePageScreenBinding
+    private val viewModel: SharedViewModel by activityViewModels()
+    private lateinit var homePageAdapter: HomePageAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentHomePageScreenBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (homePage == null) createHomePage()
+        setUpRecyclerViewAdapter()
+    }
+
+    private fun createHomePage() {
+        viewModel.setPublisherDataList(MockDataGenerator.getGeneratedData())
+
+        val tblHomePageSettings: TBLHomePageSettings =
+            TBLHomePageSettings.TBLHomePageSettingsBuilder(
+                HOME_PAGE_PAGE_URL,
+                SECTION_1_NAME, SECTION_2_NAME, SECTION_3_NAME
+            ).build() ?: return
+
+        homePage = Taboola.getHomePage(
+            tblHomePageSettings,
+            object : TBLHomePageListener() {
+                override fun onHomePageStatusChanged(active: Boolean) {
+                    super.onHomePageStatusChanged(active)
+
+                    if (active) {
+                        homePage?.fetchContent(object : TBLFetchContentCallback {
+                            override fun onComplete(
+                                isHomePageEnabled: Boolean,
+                                homePageDataSource: TBLHomePageDataSource
+                            ) {
+                                if (isHomePageEnabled) swapItems(homePageDataSource.items)
+                            }
+
+                            override fun onFailure(error: String) {}
+                        })
+                    }
+                }
+
+                override fun onHomePageItemClick(
+                    sectionName: String?,
+                    itemId: String?,
+                    clickUrl: String?,
+                    isOrganic: Boolean,
+                    customData: String?
+                ): Boolean {
+                    viewModel.switchFragment(
+                        requireActivity(),
+                        ArticleScreenFragment.newInstance(clickUrl)
+                    )
+                    return false
+                }
+            }
+        )
+    }
+
+    private fun setUpRecyclerViewAdapter() {
+        homePageAdapter =
+            HomePageAdapter(null, true, object : HomePageItemClickListener {
+                override fun onClick(url: String) {
+                    Log.d(TAG, "Article item clicked $url");
+                    viewModel.switchFragment(
+                        requireActivity(),
+                        ArticleScreenFragment.newInstance(url)
+                    )
+                }
+            })
+
+        binding.homepageRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+            adapter = homePageAdapter
+        }
+        homePageAdapter.setData(viewModel.getPublisherDataList() as ArrayList<BaseItem>)
+        homePage?.attach(binding.homepageRecyclerview)
+    }
+
+    private fun swapItems(recommendationItems: HashMap<String, MutableList<TBLRecommendationHomePageDataApiItem>>) {
+        if (homePage == null) return
+        var sectionStartPositionIndex = 0
+
+        val listWithSwappedItems = viewModel.getPublisherDataList().toMutableList()
+        var sectionName = ""
+
+        for (position in listWithSwappedItems.indices) {
+            val currentItem = listWithSwappedItems[position]
+            if (currentItem is Article) sectionName = currentItem.sectionName
+            if (currentItem is Header) sectionStartPositionIndex = position + 1
+
+            if (homePage!!.shouldSwapItemInSectionDataApi(sectionName, position, sectionStartPositionIndex)) {
+                val relativePosition = position - sectionStartPositionIndex
+                val recommendation = getRecommendation(sectionName, recommendationItems, relativePosition)
+
+                if (recommendation != null) {
+                    val swappedItem = createSwappedItem(sectionName, recommendation)
+                    listWithSwappedItems[position] = swappedItem
+                    homePage?.reportSwapDataApi(sectionName, position, true)
+                }
+            }
+        }
+
+        viewModel.setPublisherDataList(listWithSwappedItems)
+        requireActivity().runOnUiThread {
+            homePageAdapter.setData(listWithSwappedItems as ArrayList)
+        }
+    }
+
+    private fun getRecommendation(
+        sectionName: String,
+        recommendationMap: HashMap<String, MutableList<TBLRecommendationHomePageDataApiItem>>,
+        relativePosition: Int
+    ): TBLRecommendationHomePageDataApiItem? {
+        val recommendationListForUnit = recommendationMap.get(sectionName)
+        if (recommendationListForUnit == null || recommendationListForUnit.isEmpty()) return null
+
+        for (item in recommendationListForUnit) {
+            if (relativePosition == item.swapIndexInSection) return item
+        }
+
+        return null
+    }
+
+    private fun createSwappedItem(
+        sectionName: String, recommendationItem: TBLRecommendationHomePageDataApiItem
+    ): Article {
+        return Article(
+            recommendationItem.title,
+            recommendationItem.description,
+            0,
+            recommendationItem.imageUrl,
+            "",
+            sectionName,
+            true
+        )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        viewModel.apply {
+            setToolbarTitle(requireActivity(), HP4UDemoConstants.NEWS_SCREEN_TOOLBAR_TITLE)
+            setToolbarTitleTextAppearance(toolbar, R.style.NoticeTextAppearance)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        homePage?.clear()
+    }
+}

@@ -13,6 +13,7 @@ import com.taboola.hp4udemoapplication.model.Header
 
 class HomePageAdapter(
     private var homePage: TBLHomePage?,
+    private val isHomePageDataApiMode: Boolean,
     private val onItemClickListener: HomePageItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -47,7 +48,7 @@ class HomePageAdapter(
                 return mainItemViewHolder
             }
             DEFAULT_ARTICLE -> {
-                val viewHolder = HomePageItemViewHolder(view)
+                val viewHolder = if (isHomePageDataApiMode) HomePageDataApiItemViewHolder(view) else HomePageItemViewHolder(view)
                 view.setOnClickListener {
                     val url = (data[viewHolder.adapterPosition] as Article).url
                     onItemClickListener.onClick(url)
@@ -65,9 +66,13 @@ class HomePageAdapter(
                 (holder as MainHomePageItemViewHolder).onBind(data[position] as Article)
             }
             DEFAULT_ARTICLE -> if (data[position] is Article) {
-                (holder as HomePageItemViewHolder).onBind(
+                (holder as? HomePageItemViewHolder)?.onBind(
                     homePage,
                     position,
+                    data[position] as Article
+                )
+
+                (holder as? HomePageDataApiItemViewHolder)?.onBind(
                     data[position] as Article
                 )
             }

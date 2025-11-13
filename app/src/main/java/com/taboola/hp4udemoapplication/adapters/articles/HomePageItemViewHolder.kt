@@ -31,15 +31,14 @@ class HomePageItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
             itemView,
             title,
             content,
-            image,
-            null
+            image
         )
         if (swappedPerformed == null || !swappedPerformed) {
             animatedBackgroundTextView?.visibility = View.GONE
             title?.text = article.title
             content?.text = article.content
-            if (article.imageUrl != 0) {
-                Picasso.get().load(article.imageUrl).into(image)
+            if (article.imageResourceId != 0) {
+                Picasso.get().load(article.imageResourceId).into(image)
             }
         } else {
             animatedBackgroundTextView?.visibility = View.VISIBLE
