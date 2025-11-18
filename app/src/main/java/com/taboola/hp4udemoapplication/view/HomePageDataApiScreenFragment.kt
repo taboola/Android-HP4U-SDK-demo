@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -81,6 +82,8 @@ class HomePageDataApiScreenFragment : Fragment() {
 
                             override fun onFailure(error: String) {}
                         })
+                    } else {
+                        Toast.makeText(requireContext(), "HomePage is not active.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -121,26 +124,45 @@ class HomePageDataApiScreenFragment : Fragment() {
         homePage?.attach(binding.homepageRecyclerview)
     }
 
+    /**
+     * Processes a list of home page items, identifying specific sections and potentially
+     * swapping out a Publisher's item with a recommendation item.
+     * This function mutates the main data list held by the ViewModel.
+     */
     private fun swapItems(recommendationItems: HashMap<String, MutableList<TBLRecommendationHomePageDataApiItem>>) {
-        if (homePage == null) return
         var sectionStartPositionIndex = 0
 
+        // Get the current list of items from the ViewModel and make it mutable for potential swapping.
         val listWithSwappedItems = viewModel.getPublisherDataList().toMutableList()
         var sectionName = ""
 
+        // Iterate through every item in the list by its index (position).
         for (position in listWithSwappedItems.indices) {
             val currentItem = listWithSwappedItems[position]
-            if (currentItem is Article) sectionName = currentItem.sectionName
-            if (currentItem is Header) sectionStartPositionIndex = position + 1
 
-            if (homePage!!.shouldSwapItemInSectionDataApi(sectionName, position, sectionStartPositionIndex)) {
-                val relativePosition = position - sectionStartPositionIndex
-                val recommendation = getRecommendation(sectionName, recommendationItems, relativePosition)
+            // Determine the current section context based on the item type.
+            when (currentItem) {
+                is Article -> sectionName = currentItem.sectionName
+                is Header -> sectionStartPositionIndex = position + 1
+            }
 
-                if (recommendation != null) {
-                    val swappedItem = createSwappedItem(sectionName, recommendation)
-                    listWithSwappedItems[position] = swappedItem
-                    homePage?.reportSwapDataApi(sectionName, position, true)
+            homePage?.let {
+                // Check if a swap is needed at this specific position within the current section.
+                if (it.shouldSwapItemInSectionDataApi(sectionName, position, sectionStartPositionIndex)) {
+                    // Calculate the item's position relative to the start of its section.
+                    // Example: If section starts at index 5 and current position is 7, relativePosition is 2.
+                    val relativePosition = position - sectionStartPositionIndex
+
+                    // Fetch the corresponding recommendation item from the pre-fetched map.
+                    val recommendation =
+                        getRecommendation(sectionName, recommendationItems, relativePosition)
+
+                    // If a valid recommendation item exists for this specific relative position, perform the swap and report the successful swap.
+                    if (recommendation != null) {
+                        val swappedItem = createSwappedItem(sectionName, recommendation)
+                        listWithSwappedItems[position] = swappedItem
+                        it.reportSwapDataApi(sectionName, position, true)
+                    }
                 }
             }
         }
@@ -151,18 +173,29 @@ class HomePageDataApiScreenFragment : Fragment() {
         }
     }
 
+    /**
+     * Retrieves a specific recommendation item from a list associated with a section name,
+     * based on its relative position (swapIndexInSection).
+     */
     private fun getRecommendation(
         sectionName: String,
         recommendationMap: HashMap<String, MutableList<TBLRecommendationHomePageDataApiItem>>,
         relativePosition: Int
     ): TBLRecommendationHomePageDataApiItem? {
+        // Retrieve the list of recommendations associated with the provided sectionName
         val recommendationListForUnit = recommendationMap.get(sectionName)
+        // Check if the list was not found or is empty. If so, there's no item to return.
         if (recommendationListForUnit == null || recommendationListForUnit.isEmpty()) return null
 
+        // Iterate through all items in the section's list to find the one
+        // whose 'swapIndexInSection' matches the requested relativePosition.
         for (item in recommendationListForUnit) {
-            if (relativePosition == item.swapIndexInSection) return item
+            // Check if the item's index matches the requested position.
+            if (relativePosition == item.swapIndexInSection) return item // Found the specific item at the requested relative position.
         }
 
+        // If the loop completes without finding a match (i.e., no item in the list has
+        // a 'swapIndexInSection' equal to relativePosition), return null.
         return null
     }
 
