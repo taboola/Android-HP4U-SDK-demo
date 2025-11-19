@@ -35,7 +35,7 @@ import com.taboola.hp4udemoapplication.viewmodel.SharedViewModel
 class HomePageDataApiScreenFragment : Fragment() {
 
     private val TAG = HomePageDataApiScreenFragment::class.java.simpleName
-    private var homePage: TBLHomePage? = null
+    private lateinit var homePage: TBLHomePage
     private lateinit var binding: FragmentHomePageScreenBinding
     private val viewModel: SharedViewModel by activityViewModels()
     private lateinit var homePageAdapter: HomePageAdapter
@@ -52,7 +52,7 @@ class HomePageDataApiScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (homePage == null) createHomePage()
+        createHomePage()
         setUpRecyclerViewAdapter()
     }
 
@@ -72,7 +72,7 @@ class HomePageDataApiScreenFragment : Fragment() {
                     super.onHomePageStatusChanged(active)
 
                     if (active) {
-                        homePage?.fetchContent(object : TBLFetchContentCallback {
+                        homePage.fetchContent(object : TBLFetchContentCallback {
                             override fun onComplete(
                                 isHomePageEnabled: Boolean,
                                 homePageDataSource: TBLHomePageDataSource
@@ -121,7 +121,7 @@ class HomePageDataApiScreenFragment : Fragment() {
             adapter = homePageAdapter
         }
         homePageAdapter.setData(viewModel.getPublisherDataList() as ArrayList<BaseItem>)
-        homePage?.attach(binding.homepageRecyclerview)
+        homePage.attach(binding.homepageRecyclerview)
     }
 
     /**
@@ -146,23 +146,21 @@ class HomePageDataApiScreenFragment : Fragment() {
                 is Header -> sectionStartPositionIndex = position + 1
             }
 
-            homePage?.let {
-                // Check if a swap is needed at this specific position within the current section.
-                if (it.shouldSwapItemInSectionDataApi(sectionName, position, sectionStartPositionIndex)) {
-                    // Calculate the item's position relative to the start of its section.
-                    // Example: If section starts at index 5 and current position is 7, relativePosition is 2.
-                    val relativePosition = position - sectionStartPositionIndex
+            // Check if a swap is needed at this specific position within the current section.
+            if (homePage.shouldSwapItemInSectionDataApi(sectionName, position, sectionStartPositionIndex)) {
+                // Calculate the item's position relative to the start of its section.
+                // Example: If section starts at index 5 and current position is 7, relativePosition is 2.
+                val relativePosition = position - sectionStartPositionIndex
 
-                    // Fetch the corresponding recommendation item from the pre-fetched map.
-                    val recommendation =
-                        getRecommendation(sectionName, recommendationItems, relativePosition)
+                // Fetch the corresponding recommendation item from the pre-fetched map.
+                val recommendation =
+                    getTBLRecommendationHomePageDataApiItem(sectionName, recommendationItems, relativePosition)
 
-                    // If a valid recommendation item exists for this specific relative position, perform the swap and report the successful swap.
-                    if (recommendation != null) {
-                        val swappedItem = createSwappedItem(sectionName, recommendation)
-                        listWithSwappedItems[position] = swappedItem
-                        it.reportSwapDataApi(sectionName, position, true)
-                    }
+                // If a valid recommendation item exists for this specific relative position, perform the swap and report the successful swap.
+                if (recommendation != null) {
+                    val swappedItem = createSwappedItem(sectionName, recommendation)
+                    listWithSwappedItems[position] = swappedItem
+                    homePage.reportSwapDataApi(sectionName, position, true)
                 }
             }
         }
@@ -177,7 +175,7 @@ class HomePageDataApiScreenFragment : Fragment() {
      * Retrieves a specific recommendation item from a list associated with a section name,
      * based on its relative position (swapIndexInSection).
      */
-    private fun getRecommendation(
+    private fun getTBLRecommendationHomePageDataApiItem(
         sectionName: String,
         recommendationMap: HashMap<String, MutableList<TBLRecommendationHomePageDataApiItem>>,
         relativePosition: Int
@@ -224,6 +222,6 @@ class HomePageDataApiScreenFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        homePage?.clear()
+        homePage.clear()
     }
 }

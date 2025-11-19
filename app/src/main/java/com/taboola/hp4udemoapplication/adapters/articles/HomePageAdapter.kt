@@ -48,7 +48,7 @@ class HomePageAdapter(
                 return mainItemViewHolder
             }
             DEFAULT_ARTICLE -> {
-                val viewHolder = if (isHomePageDataApiMode) HomePageDataApiItemViewHolder(view) else HomePageItemViewHolder(view)
+                val viewHolder = when (isHomePageDataApiMode) { true -> HomePageDataApiItemViewHolder(view) false -> HomePageItemViewHolder(view) }
                 view.setOnClickListener {
                     val url = (data[viewHolder.adapterPosition] as Article).url
                     onItemClickListener.onClick(url)

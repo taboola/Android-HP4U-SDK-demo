@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -51,6 +52,11 @@ class HomePageScreenFragment : Fragment() {
         homePage = Taboola.getHomePage(
             tblHomePageSettings,
             object : TBLHomePageListener() {
+                override fun onHomePageStatusChanged(active: Boolean) {
+                    super.onHomePageStatusChanged(active)
+                    if (!active) Toast.makeText(requireContext(), "HomePage is not active.", Toast.LENGTH_SHORT).show()
+                }
+
                 override fun onHomePageItemClick(
                     sectionName: String?,
                     itemId: String?,
