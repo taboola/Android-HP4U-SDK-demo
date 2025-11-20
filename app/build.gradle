@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.taboola.hp4udemoapplication"
         minSdk 21
-        targetSdk 32
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
@@ -35,6 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.taboola.hp4udemoapplication'
 }
 
 dependencies {
@@ -50,7 +51,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
     implementation 'com.squareup.picasso:picasso:2.8'
     //Taboola SDK
-    implementation 'com.taboola:android-sdk:3.8.13'
+    implementation 'com.taboola:android-sdk:4.0.17'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

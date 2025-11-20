@@ -2,7 +2,7 @@
 
 ## Preface
 
-This project showcases how to integrate Taboola's SDK on Android and use its HomePage capabilities.
+This project showcases how to integrate Taboola's SDK on Android and use its HomePage capabilities. 
 
 ### Initialization
 
@@ -38,13 +38,27 @@ The parameters you need to pass in are:
 
 2. Next, it is advised to call `fetchContent` as soon as you can so that content will be loaded into the HomePage instance
 
-        homePage.fetchContent();
+   - Home page Swapping approach: 
+        `homePage.fetchContent();`
+   
+   - Home page Data API approach:  
+        `homePage.fetchContent(object : TBLFetchContentCallback {
+              override fun onComplete(isHomePageEnabled: Boolean, homePageDataSource: TBLHomePageDataSource) {
+                  // Save recommendations to your data structure
+              }
+              override fun onFailure(error: String) {
+                  // Handle the failure
+              }
+            });
+       `
 
 ### Swap Articles
 
-To swap articles with content from Taboola,
-call the `shouldSwapItemInSection` function in your OnBind methd to get the swapped item's content.
-It returns True if the item was swapped, False if it wasn't.
+- Home page Swapping approach:
+
+    To swap articles with content from Taboola, 
+    call the `shouldSwapItemInSection` function in your OnBind methd to get the swapped item's content.
+    It returns True if the item was swapped, False if it wasn't.
 
 
         public boolean shouldSwapItemInSection(
@@ -56,20 +70,54 @@ It returns True if the item was swapped, False if it wasn't.
                                 @Nullable final ImageView thumbnailView,
                                 @Nullable AdditionalViews additionalViews) 
 
-The parameters you need to pass in are:
-- linePosition: of the cell
-- sectionName: representing section
-- lineView: view of the cell
-- titleView: UI element representing the title of the cell
-- contentView: UI element representing the description of the cell
-- thumbnailView: UI element representing the image of the cell
-- additionalView(optional): UI element representing the all other view in the lineView which aren’t mandatory
+    The parameters you need to pass in are:
+    - linePosition: of the cell
+    - sectionName: representing section
+    - lineView: view of the cell
+    - titleView: UI element representing the title of the cell
+    - contentView: UI element representing the description of the cell
+    - thumbnailView: UI element representing the image of the cell
+    - additionalView(optional): UI element representing the all other view in the lineView which aren’t mandatory
+
+- Home page Data API approach:
+  
+    Invoke `shouldSwapItemInSectionDataApi` for every item in your list after receiving the 
+    recommendations (and only if the home page is enabled).
+    Invoking this method for all of your items (including those that will not be swapped) is necessary 
+    for Taboola to maintain an accurate map of sections and positions.
+    The boolean value returned by `shouldSwapItemInSectionDataApi` (true or false) indicates whether 
+    the item should be swapped:
+    If `true`: Replace the current list item with the available item from Toboola's recommendations list.
+    If `false`: Invoke addClickUrlForDuplicationCheck to allow Taboola to track if this item is duplicated elsewhere on the homepage.
+
+        public boolean shouldSwapItemInSectionDataApi(
+                                    String sectionName, 
+                                    int linePosition, 
+                                    int sectionStartPosition)
+
+  The parameters you need to pass in are:
+    - sectionName: representing section
+    - linePosition: of the cell
+    - sectionStartPosition: position of the first item in the section
 
 #### How does the swapping take place?
-When you call `shouldSwapItemInSection`, Taboola verifies that this item is allowed to be swapped and validates the fields of the content, then performs a swap with a recommendation.
-Taboola will handle the views the publisher desires to swap.
-It will validate the fields of the content and the swapped content as well.
-After a successful validation - Taboola will swap the publisher’s content with Taboola recommendations, and return a boolean that indicates if the swapping process did occur.
+
+- Home page Swapping approach:
+    
+    When you call `shouldSwapItemInSection`, Taboola verifies that this item is allowed to be swapped and validates the fields of the content, then performs a swap with a recommendation.
+    Taboola will handle the views the publisher desires to swap.
+    It will validate the fields of the content and the swapped content as well.
+    After a successful validation - Taboola will swap the publisher’s content with Taboola recommendations, and return a boolean that indicates if the swapping process did occur.
+
+- Home page Data API approach:
+    
+    After calling `shouldSwapItemInSectionDataApi`, you must report the result calling `reportSwapDataApi'
+
+    If swap succeeds: Pass `true` for `itemHasBeenSwapped`
+    `homePage.reportSwapDataApi(sectionName, position, true);`
+
+    If swap fails: Pass `false` for `itemHasBeenSwapped`
+     `homePage.reportSwapDataApi(sectionName, position, false);`
 
 ### Additional HomePage functionality
 

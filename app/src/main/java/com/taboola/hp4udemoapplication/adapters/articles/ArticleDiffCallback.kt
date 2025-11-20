@@ -26,7 +26,7 @@ class ArticleDiffCallback(
         } else {
             ((oldItem as Article).title == (newItem as Article).title
                     && oldItem.content == newItem.content
-                    && oldItem.imageUrl == newItem.imageUrl
+                    && oldItem.imageResourceId == newItem.imageResourceId
                     && oldItem.url == newItem.url
                     && oldItem.category == newItem.category)
         }
